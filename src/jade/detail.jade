@@ -1,0 +1,29 @@
+ons-page
+    ons-toolbar
+        div.left
+            ons-back-button 
+        div.center Settings
+    ons-row.profile-wrapper
+        ons-col.profile-image-wrapper(width="60px")
+            div.profile-image
+        ons-col
+            div.profile-name Foobar
+            div.profile-email foobar@example.com
+    div.settings-header Share
+    ons-list.settings-list(modifier="inset")
+        ons-list-item Twitter
+            ons-switch(modifier="list-item")
+        ons-list-item Facebook
+            ons-switch(modifier="list-item" checked)
+    div.settings-header Others
+    ons-list.settings-list(modifier="inset")
+        ons-list-item(modifier="chevron" ng-click="doSomething()")
+            | Terms of Service
+        ons-list-item(modifier="chevron" ng-click="doSomething()")
+            | Privacy Policy
+    br
+    ons-list.settings-list(modifier="inset")
+        ons-list-item(modifier="tappable" ng-click="doSomething()")
+            ons-icon(icon="ion-log-out" style="opacity: 0.8")
+            | Sign out
+    br

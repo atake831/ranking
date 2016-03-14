@@ -1,0 +1,23 @@
+div.select(ng-controller="SelectController")
+  div.container
+    p コートを選択してください
+    table.reservation-table(border="1")
+      tr
+        td.left 名前
+        td.right 竹口　輝
+      tr
+        td.left 電話番号
+        td.right 090********
+      tr
+        td.left 日付
+        td.right {{ start.format("YYYY年MM月") }}
+      tr
+        td.left 時間
+        td.right {{ start.format("HH:mm") }} 〜 {{ end.format("HH:mm") }}
+      tr
+        td.left コート
+        td.right 
+          select(ng-model="selectedCourt" ng-options="court.name for court in courts")
+    div.exec
+      button.btn.btn-success(ng-click="reserve()") 予約する
+  

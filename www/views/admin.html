@@ -1,0 +1,34 @@
+
+<div ng-controller="AdminController" class="select">
+  <div class="container">
+    <div ng-if="showReservation" class="reservation">
+      <p>未処理の予約</p>
+      <table border="1" class="reservation-table">
+        <tr>
+          <td class="left">名前</td>
+          <td class="right">竹口　輝</td>
+        </tr>
+        <tr>
+          <td class="left">電話番号</td>
+          <td class="right">090********</td>
+        </tr>
+        <tr>
+          <td class="left">日付</td>
+          <td class="right">2016-02-18</td>
+        </tr>
+        <tr>
+          <td class="left">時間</td>
+          <td class="right">12:00 〜 14:00</td>
+        </tr>
+      </table>
+      <div class="exec">
+        <button ng-click="confirm()" class="btn btn-success">予約を確定する</button>
+      </div>
+      <div class="exec">
+        <button ng-click="cancel()" class="btn btn-warning">予約を取り消す</button>
+      </div>
+    </div>
+    <p></p>
+    <div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+  </div>
+</div>

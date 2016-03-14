@@ -1,0 +1,24 @@
+div.select(ng-controller="AdminController")
+  div.container
+    div.reservation(ng-if="showReservation")
+      p 未処理の予約
+      table.reservation-table(border="1")
+        tr
+          td.left 名前
+          td.right 竹口　輝
+        tr
+          td.left 電話番号
+          td.right 090********
+        tr
+          td.left 日付
+          td.right 2016-02-18
+        tr
+          td.left 時間
+          td.right 12:00 〜 14:00
+      div.exec
+        button.btn.btn-success(ng-click="confirm()") 予約を確定する
+      div.exec
+        button.btn.btn-warning(ng-click="cancel()") 予約を取り消す
+  
+    p
+    div(ui-calendar="uiConfig.calendar" ng-model="eventSources")

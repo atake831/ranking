@@ -1,0 +1,33 @@
+
+<div ng-controller="SelectController" class="select">
+  <div class="container">
+    <p>コートを選択してください</p>
+    <table border="1" class="reservation-table">
+      <tr>
+        <td class="left">名前</td>
+        <td class="right">竹口　輝</td>
+      </tr>
+      <tr>
+        <td class="left">電話番号</td>
+        <td class="right">090********</td>
+      </tr>
+      <tr>
+        <td class="left">日付</td>
+        <td class="right">{{ start.format("YYYY年MM月") }}</td>
+      </tr>
+      <tr>
+        <td class="left">時間</td>
+        <td class="right">{{ start.format("HH:mm") }} 〜 {{ end.format("HH:mm") }}</td>
+      </tr>
+      <tr>
+        <td class="left">コート</td>
+        <td class="right"> 
+          <select ng-model="selectedCourt" ng-options="court.name for court in courts"></select>
+        </td>
+      </tr>
+    </table>
+    <div class="exec">
+      <button ng-click="reserve()" class="btn btn-success">予約する</button>
+    </div>
+  </div>
+</div>
