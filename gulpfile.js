@@ -14,7 +14,7 @@ gulp.task('compile-js', function() {
   return gulp.src([__dirname + '/src/scripts/**/*.js'])
     .pipe(plumber())
     .pipe($.concat('all.js'))
-    .pipe(gulp.dest(__dirname + '/www/scripts/'));
+    .pipe(gulp.dest(__dirname + '/public/scripts/'));
 });
 
 // compile-jade
@@ -24,7 +24,7 @@ gulp.task('compile-jade', function() {
     .pipe($.jade({
         pretty: true
     }))
-    .pipe(gulp.dest(__dirname + '/www/views/'));
+    .pipe(gulp.dest(__dirname + '/public/views/'));
 });
 
 // compile-stylus
@@ -34,12 +34,12 @@ gulp.task('compile-stylus', function() {
     .pipe($.stylus({errors: true}))
     .pipe($.concat('style.css'))
     .pipe($.autoprefixer())
-    .pipe(gulp.dest(__dirname + '/www/styles/'));
+    .pipe(gulp.dest(__dirname + '/public/styles/'));
 });
 
 // jshint
 gulp.task('jshint', function() {
-  return gulp.src([__dirname + '/www/*.js', __dirname + '/www/js/**/*.js'])
+  return gulp.src([__dirname + '/public/*.js', __dirname + '/public/js/**/*.js'])
     .pipe(plumber())
     .pipe($.cached('jshint'))
     .pipe($.jshint())
@@ -68,7 +68,7 @@ gulp.task('serve', ['build', 'browser-sync'], function() {
   );
 
   gulp.watch(
-    [__dirname + '/www/*.js', __dirname + '/www/js/**/*.js'],
+    [__dirname + '/public/*.js', __dirname + '/public/js/**/*.js'],
     {debounceDelay: 400},
     ['jshint']
   );
@@ -78,7 +78,7 @@ gulp.task('serve', ['build', 'browser-sync'], function() {
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-      baseDir: __dirname + '/www/',
+      baseDir: __dirname + '/public/',
       directory: true
     },
     ghostMode: false,
@@ -88,7 +88,7 @@ gulp.task('browser-sync', function() {
   });
 
   gulp.watch([
-    __dirname + '/www/**/*.{js,html,css,svg,png,gif,jpg,jpeg}'
+    __dirname + '/public/**/*.{js,html,css,svg,png,gif,jpg,jpeg}'
   ], {
     debounceDelay: 400
   }, function() {
@@ -111,7 +111,7 @@ gulp.task('concat-js-lib', function() {
       'bower_components/fullcalendar/dist/lang/ja.js'
     ])
     .pipe($.concat('vendors.js'))
-    .pipe(gulp.dest(__dirname + '/www/lib/'));
+    .pipe(gulp.dest(__dirname + '/public/lib/'));
 });
 
 // concat-css-library
@@ -121,7 +121,7 @@ gulp.task('concat-css-lib', function() {
       'bower_components/bootstrap-css/css/bootstrap.css'
     ])
     .pipe($.concat('vendors.css'))
-    .pipe(gulp.dest(__dirname + '/www/lib/'));
+    .pipe(gulp.dest(__dirname + '/public/lib/'));
 });
 
 gulp.task('concat-lib', ['concat-js-lib', 'concat-css-lib']);
