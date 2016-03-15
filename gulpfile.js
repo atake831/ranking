@@ -104,7 +104,9 @@ gulp.task('concat-js-lib', function() {
       'bower_components/flat-ui/dist/js/vendor/jquery.min.js',
       'bower_components/flat-ui/dist/js/vendor/video.js',
       'bower_components/flat-ui/dist/js/flat-ui.min.js',
-      'bower_components/scroll-up-bar/dist/scroll-up-bar.js'
+      'bower_components/scroll-up-bar/dist/scroll-up-bar.js',
+      'bower_components/angular-bootstrap/ui-bootstrap.min.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
     ])
     .pipe($.concat('vendors.js'))
     .pipe(gulp.dest(__dirname + '/public/lib/'));
@@ -114,7 +116,8 @@ gulp.task('concat-js-lib', function() {
 gulp.task('concat-css-lib', function() {
   return gulp.src([
       'bower_components/flat-ui/dist/css/vendor/bootstrap.min.css',
-      'bower_components/flat-ui/dist/css/flat-ui.min.css'
+      'bower_components/flat-ui/dist/css/flat-ui.min.css',
+      'bower_components/angular-bootstrap/ui-bootstrap-csp.css'
     ])
     .pipe($.concat('vendors.css'))
     .pipe(gulp.dest(__dirname + '/public/lib/'));

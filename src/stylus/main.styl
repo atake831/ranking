@@ -1,12 +1,21 @@
 body {
-    background-image: url('../images/background-image.png');
+    background-image: url('../images/background-image-gray.png');
+    &.red {
+        background-image: url('../images/background-image-red.png');
+    }
+    &.blue {
+        background-image: url('../images/background-image-blue.png');
+    }
+    &.gray {
+        background-image: url('../images/background-image-gray.png');
+    }
     background-repeat: repeat;
 }
 
 .main-content {
     margin: 53px auto auto auto;
     padding: 10px;
-    width: 85%;
+    width: 80%;
     height: 1000px;
     background-color: white;
 }
@@ -19,4 +28,31 @@ body {
     width: 100%;
     padding: 0px;
     margin: 0px;
+}
+
+.navbar-brand {
+    width: 100%;
+    text-align: center;
+}
+
+.navbar-header {
+    width: 10%;
+}
+
+.signin {
+    height: 200px;
+    padding: 30px;
+    div {
+        text-align: center;
+        padding: 8px;
+        margin-bottom:20px;
+    }
+    button {
+        margin-left: 10px;
+    }
+    .close {
+        position:absolute;
+        right: 10px;
+        top: 10px;
+    }
 }

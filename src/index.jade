@@ -13,6 +13,7 @@ html(lang="en" ng-app="app" ng-csp)
     link(rel="stylesheet" href="styles/style.css")
 
     title ランキング
+
   body(ng-controller="AppController")
     nav.navbar.navbar-inverse.navbar-embossed(role="navigation" style="position: absolute; top: 0; left: 0; width: 100%; border-radius: 0px;" id="topbar")
       div.navbar-header
@@ -20,29 +21,12 @@ html(lang="en" ng-app="app" ng-csp)
           span.sr-only Toggle navigation
         a.navbar-brand(href="#") JPA
       div.collapse.navbar-collapse(id="navbar-collapse-01")
-        ul.nav.navbar-nav.navbar-left
-          li
-            a(href="#fakelink") Menu Item
-              span.navbar-unread 1
-          li.dropdown
-            a.dropdown-toggle(href="#" data-toggle="dropdown") Messages 
-              b.caret
-            span.dropdown-arrow
-            ul.dropdown-menu
-              li
-                a(href="#") Action
-              li 
-                a(href="#") Another action
-              li 
-                a(href="#") Something else here
-          li
-            a(href="#fakelink") About Us
-          form.navbar-form.navbar-right(action="#" role="search")
-            div.form-group
-              div.input-group
-                input.form-control(id="navbarInput-01" type="search" placeholder="Search")
-                span.input-group-btn
-                  button.btn(type="submit")
-                    span.fui-search
-
+        ul.nav.navbar-nav.navbar-left(ng-if="navbarLeft.length > 0")
+          li(ng-repeat="btn in navbarLeft")
+            a(href="{{ btn.location }}") {{ btn.text }}
+        ul.nav.navbar-nav.navbar-right(ng-if="navbarRight.length > 0")
+          li(ng-repeat="btn in navbarRight")
+            a(href="{{ btn.location }}" ng-if="btn.location") {{ btn.text }}
+            a(ng-click="btn.click()" ng-if="btn.click") {{ btn.text }}
+         
     div.main-content(ng-view)
