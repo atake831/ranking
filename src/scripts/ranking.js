@@ -2,7 +2,7 @@
     var module = angular.module('ranking', []);
 
     module.run(function($http) {
-    }
+    });
 
     module.factory('Storage', function() {
         return {
@@ -59,9 +59,11 @@
     });
 
     module.factory('API', function($http) {
+        return {};
     });
 
     module.factory('Util', function() {
+        return {};
     });
 
 })();

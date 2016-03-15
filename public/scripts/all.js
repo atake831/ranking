@@ -287,27 +287,40 @@
 
 })(jQuery);
 
-(function () {
+(function() {
     "use strict";
 
-    var app = angular.module('app', ['ngRoute']);
+    var app = angular.module('app', ['ranking', 'ngRoute']);
 
     app.config(function($routeProvider) {
         $routeProvider
             .when('/home', { templateUrl: 'views/home.html' })
-            .when('/select', { templateUrl: 'views/select.html' })
             .when('/me', { templateUrl: 'views/profile.html' })
             .when('/admin', { templateUrl: 'views/admin.html' })
             .when('/tournament', { templateUrl: 'views/tournament.html' })
             .otherwise({redirectTo: '/home'});
     });
 
-    app.controller('AppController', function ($scope, $location) {
+    app.factory('Data', function() {
+        var data = {};
+        return data;
+    });
+
+    app.run(function($rootScope, API, Data, Auth) {
+        $rootScope.common = {
+            logout: function() {
+                this.showLogin();
+            },
+        };
+    });
+
+    app.controller('AppController', function($scope, $rootScope, $location) {
         $(document).ready(function(){
             $location.path('/home');
             // $location.path('/tournament');
         });
     });
+
     app.controller('TournamentController', function ($scope, $location) {
         var rounds = Src.ROUNDS;
 
@@ -323,8 +336,11 @@
             border_radius_lines: '5px',
         });
     });
+
     app.controller('AdminController', function ($scope, $location, $timeout) {
+
     });
+
     app.controller('HomeController', function ($scope, $rootScope, $location) {
         $scope.tournament = function() {
             $location.path('/tournament');
@@ -333,7 +349,78 @@
             $location.path('/admin');
         }
     });
-} )();
+
+})();
+
+(function() {
+    var module = angular.module('ranking', []);
+
+    module.run(function($http) {
+    });
+
+    module.factory('Storage', function() {
+        return {
+            _localDataKey: 'RankingLocalData',
+            _set: function(key, value) {
+                localStorage.setItem(key, value);
+            },
+            _get: function(key) {
+                return localStorage.getItem(key);
+            },
+            _remove: function(key) {
+                return localStorage.removeItem(key);
+            },
+            set: function(key, value) {
+                var localData = JSON.parse(this._get(_localDataKey)) || {};
+                localData[key] = value;
+                this._set(_localDataKey, JSON.stringify(localData));
+            },
+            get: function(key) {
+                var localData = JSON.parse(this._get(_localDataKey));
+                if ( localData ) {
+                    return localData[key];
+                }
+                return null;
+            },
+            getAll: function() {
+                return JSON.parse(this._get(_localDataKey));
+            },
+            remove: function(key) {
+                var localData = JSON.parse(this._get(_localDataKey));
+                if ( localData ) {
+                    localData[key] = null;
+                }
+            },
+            clear: function() {
+                return localStorage.clear();
+            },
+        }
+    });
+
+    module.factory('Auth', function(Storage) {
+        var key = 'auth_token_key';
+        return {
+            hasToken: function() {
+                return this.getToken !== null;
+            },
+            setToken: function(token) {
+                Storage.set(key, token);
+            },
+            getToken: function(token) {
+                return Storage.get(key);
+            },
+        };
+    });
+
+    module.factory('API', function($http) {
+        return {};
+    });
+
+    module.factory('Util', function() {
+        return {};
+    });
+
+})();
 
 const Src = (function() {
     return {
