@@ -307,6 +307,7 @@
     });
 
     app.run(function($rootScope, API, Data, Auth) {
+        $('#topbar').scrollupbar();
         $rootScope.common = {
             logout: function() {
                 this.showLogin();
