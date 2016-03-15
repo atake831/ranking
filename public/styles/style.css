@@ -1,74 +1,20 @@
+body {
+  background-image: url("../images/background-image.png");
+  background-repeat: repeat;
+}
+.main-content {
+  margin: 53px auto auto auto;
+  padding: 10px;
+  width: 85%;
+  height: 1000px;
+  background-color: #fff;
+}
 .fc-time-grid-event {
   max-width: 70%;
 }
 .container {
-  margin-top: 80px;
-  height: 1000px;
-}
-.select .cantainer {
-  margin-top: 10px;
-}
-.select p {
-  padding: 20px;
-  text-align: center;
-  font-size: 30px;
-}
-.select .reservation-table {
   width: 100%;
-  text-align: center;
-}
-.select .reservation-table td {
-  height: 44px;
-}
-.select .reservation-table .left {
-  background-color: #f6e3ce;
-  width: 30%;
-}
-.select .reservation-table .right {
-  width: 70%;
-}
-.select .reservation-table select {
-  width: 70%;
-  text-align: center;
-}
-.select div.exec {
-  margin-top: 40px;
-  text-align: center;
-}
-.select div.exec button {
-  width: 70%;
-}
-.select .cantainer {
-  margin-top: 10px;
-}
-.select p {
-  padding: 20px;
-  text-align: center;
-  font-size: 30px;
-}
-.select .reservation-table {
-  width: 100%;
-  text-align: center;
-}
-.select .reservation-table td {
-  height: 44px;
-}
-.select .reservation-table .left {
-  background-color: #f6e3ce;
-  width: 30%;
-}
-.select .reservation-table .right {
-  width: 70%;
-}
-.select .reservation-table select {
-  width: 70%;
-  text-align: center;
-}
-.select div.exec {
-  margin-top: 40px;
-  text-align: center;
-}
-.select div.exec button {
-  width: 70%;
+  padding: 0px;
+  margin: 0px;
 }
 

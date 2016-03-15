@@ -1,0 +1,48 @@
+html(lang="en" ng-app="app" ng-csp)
+  head
+    meta(charset="utf-8")
+    meta(name="apple-mobile-web-app-capable" content="yes")
+    meta(name="mobile-web-app-capable" content="yes")
+
+    <!-- JS dependencies (order matters!) -->
+    script(src="lib/vendors.js")
+    script(src="scripts/all.js")
+
+    <!-- CSS dependencies -->
+    link(rel="stylesheet" href="lib/vendors.css")
+    link(rel="stylesheet" href="styles/style.css")
+
+    title ランキング
+  body(ng-controller="AppController")
+    nav.navbar.navbar-inverse.navbar-embossed(role="navigation" style="position: absolute; top: 0; left: 0; width: 100%; border-radius: 0px;" id="topbar")
+      div.navbar-header
+        button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01")
+          span.sr-only Toggle navigation
+        a.navbar-brand(href="#") JPA
+      div.collapse.navbar-collapse(id="navbar-collapse-01")
+        ul.nav.navbar-nav.navbar-left
+          li
+            a(href="#fakelink") Menu Item
+              span.navbar-unread 1
+          li.dropdown
+            a.dropdown-toggle(href="#" data-toggle="dropdown") Messages 
+              b.caret
+            span.dropdown-arrow
+            ul.dropdown-menu
+              li
+                a(href="#") Action
+              li 
+                a(href="#") Another action
+              li 
+                a(href="#") Something else here
+          li
+            a(href="#fakelink") About Us
+          form.navbar-form.navbar-right(action="#" role="search")
+            div.form-group
+              div.input-group
+                input.form-control(id="navbarInput-01" type="search" placeholder="Search")
+                span.input-group-btn
+                  button.btn(type="submit")
+                    span.fui-search
+
+    div.main-content(ng-view)

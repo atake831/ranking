@@ -19,12 +19,12 @@ gulp.task('compile-js', function() {
 
 // compile-jade
 gulp.task('compile-jade', function() {
-  return gulp.src([__dirname + '/src/jade/**/*.jade'])
+  return gulp.src(['src/*.jade', 'src/**/*.jade'])
     .pipe(plumber())
     .pipe($.jade({
         pretty: true
     }))
-    .pipe(gulp.dest(__dirname + '/public/views/'));
+    .pipe(gulp.dest('public'));
 });
 
 // compile-stylus
@@ -56,7 +56,7 @@ gulp.task('serve', ['build', 'browser-sync'], function() {
   );
 
   gulp.watch(
-    [__dirname + '/src/jade/**/*.jade'],
+    [__dirname + '/src/*.jade', __dirname + '/src/views/**/*.jade'],
     {debounceDelay: 400},
     ['compile-jade']
   );
