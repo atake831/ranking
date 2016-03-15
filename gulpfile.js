@@ -99,16 +99,11 @@ gulp.task('browser-sync', function() {
 // concat-js-library
 gulp.task('concat-js-lib', function() {
   return gulp.src([
-      'bower_components/jquery/dist/jquery.min.js',
       'bower_components/angular/angular.min.js',
       'bower_components/angular-route/angular-route.min.js',
-      'bower_components/angular-bootstrap/ui-bootstrap.min.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'bower_components/moment/moment.js',
-      'bower_components/angular-ui-calendar/src/calendar.js',
-      'bower_components/fullcalendar/dist/fullcalendar.js',
-      'bower_components/fullcalendar/dist/gcal.js',
-      'bower_components/fullcalendar/dist/lang/ja.js'
+      'bower_components/flat-ui/dist/js/vendor/jquery.min.js',
+      'bower_components/flat-ui/dist/js/vendor/video.js',
+      'bower_components/flat-ui/dist/js/flat-ui.min.js'
     ])
     .pipe($.concat('vendors.js'))
     .pipe(gulp.dest(__dirname + '/public/lib/'));
@@ -117,8 +112,8 @@ gulp.task('concat-js-lib', function() {
 // concat-css-library
 gulp.task('concat-css-lib', function() {
   return gulp.src([
-      'bower_components/fullcalendar/dist/fullcalendar.min.css',
-      'bower_components/bootstrap-css/css/bootstrap.css'
+      'bower_components/flat-ui/dist/css/vendor/bootstrap.min.css',
+      'bower_components/flat-ui/dist/css/flat-ui.min.css'
     ])
     .pipe($.concat('vendors.css'))
     .pipe(gulp.dest(__dirname + '/public/lib/'));
