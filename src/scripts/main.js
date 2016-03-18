@@ -45,6 +45,11 @@
     });
 
     app.controller('AppController', function($scope, $rootScope, $location, Data, $uibModal) {
+        $(document).ready(function(){
+            // $location.path('/home');
+            $location.path('/tournaments');
+        });
+
         function changeBackgroundImage(color) {
             $('body').css(
                 'background-image', 
@@ -75,11 +80,8 @@
                 text: "Signup/Login"
             },
         ];
+
         Data.currentRole = 'user';
-        $(document).ready(function(){
-            $location.path('/home');
-            // $location.path('/tournament');
-        });
         $rootScope.common = {
             logout: function() {
                 this.showLogin();
@@ -186,6 +188,15 @@
     app.controller('RankingController', function ($scope, $rootScope) {
     });
     app.controller('TournamentsController', function ($scope, $rootScope) {
+        var rounds = Src.ROUNDS;
+
+        $(".brackets").brackets(rounds, {});
+        $scope.admin = function() {
+            $rootScope.common.role.changeAdmin();
+        }
+        $scope.facility = function() {
+            $rootScope.common.role.changeFacility();
+        }
     });
     app.controller('TournamentDetailController', function ($scope, $rootScope) {
     });
@@ -225,30 +236,11 @@
     });
 
     app.controller('TournamentController', function ($scope, $rootScope, $location) {
-        var rounds = Src.ROUNDS;
-
-        $(".brackets").brackets({
-            rounds: rounds,
-            color_title: 'black',
-            border_color: 'black',
-            color_player: 'white',
-            bg_player: '#46CFB0',
-            color_player_hover: 'white',
-            bg_player_hover: '#E95546',
-            border_radius_player: '5px',
-            border_radius_lines: '5px',
-        });
-        $scope.admin = function() {
-            $rootScope.common.role.changeAdmin();
-        }
-        $scope.facility = function() {
-            $rootScope.common.role.changeFacility();
-        }
     });
 
     app.controller('HomeController', function ($scope, $rootScope, $location, Data)  {
         $scope.tournament = function() {
-            $location.path('/tournament');
+            $location.path('/tournaments');
         }
         $scope.logout = function() {
             $rootScope.common.role.changeLogoutUser();

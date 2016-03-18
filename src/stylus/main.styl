@@ -1,3 +1,5 @@
+@import 'variables';
+
 body {
     background-image: url('../images/background-image-gray.png');
     &.red {
@@ -10,6 +12,18 @@ body {
         background-image: url('../images/background-image-gray.png');
     }
     background-repeat: repeat;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .main-content {
@@ -31,12 +45,7 @@ body {
 }
 
 .navbar-brand {
-    width: 100%;
     text-align: center;
-}
-
-.navbar-header {
-    width: 10%;
 }
 
 .signin {
@@ -56,3 +65,64 @@ body {
         top: 10px;
     }
 }
+
+.bracket-container {
+    margin-top:10px;
+}
+
+.brackets {
+    .container-brackets {
+        position: relative;
+        margin-top: 5px;
+
+        .round {
+            width: 150px;
+            margin-left: -75px;
+            float: left;
+            &:first-child {
+                margin-left: 0px;
+            }
+            .match {
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+                .player {
+                    vendor('box-sizing', content-box);
+                    border: solid 1px black;
+                    border-radius: 5px;
+                    height: 23px;
+                    padding 0px 5px;
+                    line-height: 23px;
+                    background-color: #46CFB0;
+                    &.hover {
+                        background-color: #E95546;
+                        color: white;
+                    }
+                    .name {
+                        text-align: center;
+                        text-decoration: none;
+                        cursor: pointer;
+                        width: 100%;
+                        margin-left: 10px;
+                        color: black;
+                    }
+                }
+            }
+        }
+        .separator-brackets {
+            width: 80px;
+            float: left;
+            .line {
+                vendor('box-sizing', content-box);
+                border: 1px solid black;
+                border-left: none;
+                border-radius: 0px 5px 5px 0px;
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+}
+
+

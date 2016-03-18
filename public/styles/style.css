@@ -11,6 +11,15 @@ body.blue {
 body.gray {
   background-image: url("../images/background-image-gray.png");
 }
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.text-center {
+  text-align: center;
+}
 .main-content {
   margin: 53px auto auto auto;
   padding: 10px;
@@ -27,11 +36,7 @@ body.gray {
   margin: 0px;
 }
 .navbar-brand {
-  width: 100%;
   text-align: center;
-}
-.navbar-header {
-  width: 10%;
 }
 .signin {
   height: 200px;
@@ -49,5 +54,61 @@ body.gray {
   position: absolute;
   right: 10px;
   top: 10px;
+}
+.bracket-container {
+  margin-top: 10px;
+}
+.brackets .container-brackets {
+  position: relative;
+  margin-top: 5px;
+}
+.brackets .container-brackets .round {
+  width: 150px;
+  margin-left: -75px;
+  float: left;
+}
+.brackets .container-brackets .round:first-child {
+  margin-left: 0px;
+}
+.brackets .container-brackets .round .match:last-child {
+  margin-bottom: 0px;
+}
+.brackets .container-brackets .round .match .player {
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  border: solid 1px #000;
+  border-radius: 5px;
+  height: 23px;
+  padding: 0px 5px;
+  line-height: 23px;
+  background-color: #46cfb0;
+}
+.brackets .container-brackets .round .match .player.hover {
+  background-color: #e95546;
+  color: #fff;
+}
+.brackets .container-brackets .round .match .player .name {
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  width: 100%;
+  margin-left: 10px;
+  color: #000;
+}
+.brackets .container-brackets .separator-brackets {
+  width: 80px;
+  float: left;
+}
+.brackets .container-brackets .separator-brackets .line {
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  border: 1px solid #000;
+  border-left: none;
+  border-radius: 0px 5px 5px 0px;
+}
+.brackets .container-brackets .separator-brackets .line:last-child {
+  margin-bottom: 0px;
 }
 
