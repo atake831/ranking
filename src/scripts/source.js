@@ -1,83 +1,54 @@
 const Src = (function() {
     return {
+        PLAYERS: [
+             { id: 1,  name: "Player 1" },
+             { id: 2,  name: "Player 2" },
+             { id: 3,  name: "Player 3" },
+             { id: 4,  name: "Player 4" },
+             { id: 5,  name: "Player 5" },
+             { id: 6,  name: "Player 6" },
+             { id: 7,  name: "Player 7" },
+             { id: 8,  name: "Player 8" },
+             { id: 9,  name: "Player 9" },
+             { id: 10, name: "Player 10" },
+             { id: 11, name: "Player 11" },
+             { id: 12, name: "Player 12" },
+             { id: 13, name: "Player 13" },
+             { id: 14, name: "Player 14" },
+             { id: 15, name: "Player 15" },
+             { id: 16, name: "Player 16" },
+        ],
         ROUNDS: [
             //-- round 1
             [
-                [
-                  { name: "Player 111", winner: true, ID: 111 },
-                  { name: "Player 112", ID: 112 }
-                ],
-                [
-                  { name: "Player 112", winner: true, ID: 112 },
-                  { name: "Player 212", ID: 212 }
-                ],
-                [
-                  { name: "Player 113", winner: true, ID: 113 },
-                  { name: "Player 213", ID: 213 }
-                ],
-                [
-                  { name: "Player 114", winner: true, ID: 114 },
-                  { name: "Player 214", ID: 214 }
-                ],
-                [
-                  { name: "Player 115", winner: true, ID: 115 },
-                  { name: "Player 215", ID: 215 }
-                ],
-                [
-                  { name: "Player 116", winner: true, ID: 116 },
-                  { name: "Player 216", ID: 216 }
-                ],
-                [
-                  { name: "Player 117", winner: true, ID: 117 },
-                  { name: "Player 217", ID: 217 }
-                ],
-                [
-                  { name: "Player 118", winner: true, ID: 118 },
-                  { name: "Player 218", ID: 218 }
-                ],
+                [ 1, 2 ],
+                [ 3, 4 ],
+                [ 5, 6 ],
+                [ 7, 8 ],
+                [ 9, 10 ],
+                [ 11, 12 ],
+                [ 13, 14 ],
+                [ 15, 16 ],
             ],
             //-- round 2
             [
-                [
-                  { name: "Player 111", winner: true, ID: 111 },
-                  { name: "Player 212", ID: 212 }
-                ],
-                [
-                  { name: "Player 113", winner: true, ID: 113 },
-                  { name: "Player 214", ID: 214 }
-                ],
-                [
-                  { name: "Player 115", winner: true, ID: 115 },
-                  { name: "Player 216", ID: 216 }
-                ],
-                [
-                  { name: "Player 117", winner: true, ID: 117 },
-                  { name: "Player 218", ID: 218 }
-                ],
+                [ 1, 3, ],
+                [ 5, 7, ],
+                [ 9, 11, ],
+                [ 13, 15, ],
             ],
             //-- round 3
             [
-                [
-                  { name: "Player 111", winner: true, ID: 111 },
-                  { name: "Player 113", ID: 113 }
-                ],
-                [
-                  { name: "Player 115", winner: true, ID: 115 },
-                  { name: "Player 218", ID: 218 }
-                ],
+                [ 1, 5 ],
+                [ 9, 15 ],
             ],
             //-- round 4
             [
-                [
-                  { name: "Player 113", winner: true, ID: 113 },
-                  { name: "Player 218", winner: true, ID: 218 }
-                ],
+                [ 1, 9 ],
             ],
             //-- Champion
             [
-                [
-                  { name: "Player 113", winner: true, ID: 113 }
-                ],
+                [ 9 ]
             ],
         ]
     };

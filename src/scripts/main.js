@@ -187,10 +187,13 @@
 
     app.controller('RankingController', function ($scope, $rootScope) {
     });
-    app.controller('TournamentsController', function ($scope, $rootScope) {
+    app.controller('TournamentsController', function ($scope, $rootScope, Brackets) {
+        var players = Src.PLAYERS;
         var rounds = Src.ROUNDS;
 
-        $(".brackets").brackets(rounds, {});
+        Brackets.create($(".brackets")[0], players, rounds);
+
+        // $(".brackets").brackets(players, rounds, {});
         $scope.admin = function() {
             $rootScope.common.role.changeAdmin();
         }

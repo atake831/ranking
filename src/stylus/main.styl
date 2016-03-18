@@ -22,6 +22,10 @@ body {
     float: right;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .text-center {
     text-align: center;
 }
@@ -76,6 +80,9 @@ body {
         margin-top: 5px;
 
         .round {
+            // z-indexのためのposition: relative
+            position: relative;
+            z-index: 10;
             width: 150px;
             margin-left: -75px;
             float: left;
@@ -83,9 +90,6 @@ body {
                 margin-left: 0px;
             }
             .match {
-                &:last-child {
-                    margin-bottom: 0px;
-                }
                 .player {
                     vendor('box-sizing', content-box);
                     border: solid 1px black;
@@ -106,19 +110,31 @@ body {
                         margin-left: 10px;
                         color: black;
                     }
+                    &.champion {
+                        position: relative;
+                        left: 130px;
+                        margin-bottom: 0px;
+                    }
                 }
             }
         }
         .separator-brackets {
-            width: 80px;
+            // z-indexのためのposition: relative
+            position: relative;
+            // .round width の -1/2
+            margin-left: -75px;
+            width: 180px;
             float: left;
             .line {
                 vendor('box-sizing', content-box);
                 border: 1px solid black;
                 border-left: none;
                 border-radius: 0px 5px 5px 0px;
-                &:last-child {
-                    margin-bottom: 0px;
+                &.last-line {
+                    margin-bottom: 0px !important;
+                    height: 0px !important;
+                    border-bottom: none;
+                    width: 100px;
                 }
             }
         }
