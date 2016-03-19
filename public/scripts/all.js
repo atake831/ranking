@@ -42,6 +42,7 @@
     });
 
     app.run(function($rootScope, API, Data, Auth) {
+        $("#topbar").scrollupbar();
     });
 
     app.controller('AppController', function($scope, $rootScope, $location, Data, $uibModal) {
