@@ -215,8 +215,6 @@
 
                 container.appendChild(round);
 
-                console.log( round_num + " " + round.children.length);
-
                 var sparator = this.create_separator( round_num, round.children.length );
                 container.appendChild(sparator);
 
