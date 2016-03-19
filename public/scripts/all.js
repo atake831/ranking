@@ -46,8 +46,8 @@
 
     app.controller('AppController', function($scope, $rootScope, $location, Data, $uibModal) {
         $(document).ready(function(){
-            // $location.path('/home');
-            $location.path('/tournaments');
+            $location.path('/home');
+            // $location.path('/tournaments');
         });
 
         function changeBackgroundImage(color) {
