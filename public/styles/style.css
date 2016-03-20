@@ -255,6 +255,17 @@ nav {
   right: 10px;
   top: 10px;
 }
+.facility-tournaments .facility {
+  width: 100%;
+  display: block;
+  margin-bottom: 20px;
+  min-height: 500px;
+}
+.facility-tournaments .facility .info-tournament {
+  color: #fff;
+  background-color: rgba(0,0,0,0.7);
+  margin-bottom: 0px;
+}
 .profile {
   background-color: #fff;
   width: 100%;
@@ -322,22 +333,19 @@ nav {
   -moz-box-sizing: content-box;
   border: solid 1px #000;
   border-radius: 5px;
-  height: 23px;
+  height: 55px;
   padding: 0px 5px;
-  line-height: 23px;
+  line-height: 55px;
   background-color: #46cfb0;
-}
-.brackets .container-brackets .round .match .player.hover {
-  background-color: #e95546;
-  color: #fff;
 }
 .brackets .container-brackets .round .match .player .name {
   text-align: center;
   text-decoration: none;
-  cursor: pointer;
   width: 100%;
-  margin-left: 10px;
   color: #000;
+  padding: 5px;
+  margin: 0px;
+  line-height: 1;
 }
 .brackets .container-brackets .round .match .player.champion {
   position: relative;
@@ -347,7 +355,7 @@ nav {
 .brackets .container-brackets .separator-brackets {
   position: relative;
   margin-left: -75px;
-  width: 180px;
+  width: 160px;
   float: left;
 }
 .brackets .container-brackets .separator-brackets .line {

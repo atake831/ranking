@@ -1,3 +1,51 @@
 div(ng-controller="FacilityTournamentsController")
-  div.container
-    p tournaments
+  div.container.facility-tournaments
+    h3 運営大会一覧
+    div.tournament-container-wrapper
+      div.tournament-container.grade-1.facility
+        div.info-tournament
+          p 
+            span 2016/03/30  
+            span.grade-1 JPAマスターズ  
+            span 所沢  
+            span.capacity 定員16/16
+        img(src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg")
+        div.content(id="detail1")
+          p 今年最初のJPAマスターズ！ディフェンディングチャンピオンでありランキング1, 2位の竹口ペアを倒し、新たな勝者は現れるのか？！
+          button.join.btn.btn-primary(ng-click="support()") 当日の運営サポート
+
+      div.tournament-container.grade-2.facility
+        div.info-tournament
+          p 
+            span 2016/04/03
+            span.grade-2 オープン
+            span 所沢  
+            span.capacity 定員8/10
+        img(src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg")
+        div.content(id="detail2")
+          p 今年最初のオープン大会！今年のトロフィーは誰の手に渡るのか？！
+          button.join.btn.btn-primary(ng-click="support()") 当日の運営サポート
+
+      div.tournament-container.grade-3.facility
+        div.info-tournament
+          p 
+            span 2016/04/12
+            span.grade-3 チャレンジャー
+            span 所沢  
+            span.capacity 定員5/10
+        img(src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg")
+        div.content(id="detail3")
+          p 今年最初のチャレンジャー大会！今年のトロフィーは誰の手に渡るのか？！
+          button.join.btn.btn-primary(ng-click="support()") 当日の運営サポート
+
+      div.tournament-container.grade-4.facility
+        div.info-tournament
+          p 
+            span 2016/05/05
+            span.grade-4 ビギナー
+            span 所沢  
+            span.capacity 定員2/10
+        img(src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg")
+        div.content(id="detail4")
+          p 今年最初のビギナー大会！まずはここから力を伸ばしていこう！初心者大歓迎！
+          button.join.btn.btn-primary(ng-click="support()") 当日の運営サポート

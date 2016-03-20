@@ -50,7 +50,9 @@
             // $location.path('/home');
             // $location.path('/ranking');
             // $location.path('/profile/1');
-            $location.path('/tournaments');
+            // $location.path('/tournaments');
+            // $location.path('/facility/tournaments');
+            $location.path('/facility/tournament/result');
         });
 
         function changeBackgroundImage(color) {
@@ -71,6 +73,10 @@
             {
                 location: "#/ranking",
                 text: "ランキング"
+            },
+            {
+                location: "#/tournaments",
+                text: "大会一覧"
             },
         ];
         $rootScope.navbarRight = [
@@ -128,7 +134,9 @@
                     ];
                     $rootScope.navbarRight = [
                         {
-                            location: "#/logout",
+                            click: function() {
+                                rootScope.common.logout();
+                            },
                             text: "Logout"
                         },
                     ];
@@ -152,7 +160,9 @@
                     ];
                     $rootScope.navbarRight = [
                         {
-                            location: "#/logout",
+                            click: function() {
+                                rootScope.common.logout();
+                            },
                             text: "Logout"
                         },
                     ];
@@ -204,7 +214,6 @@
     app.controller('RankingController', function ($scope, $rootScope, $location) {
         $scope.players = Src.PLAYERS;
         $scope.profile = function(id) {
-            console.log(id);
             $location.path("profile/" + id);
         };
     });
@@ -226,7 +235,6 @@
             showJoinModal();
         };
         $scope.movie = function() {
-            console.log("movie");
         };
     });
     app.controller('TournamentJoinController', function ($scope, $rootScope, $uibModalInstance, $timeout) {
@@ -348,7 +356,11 @@
     });
     app.controller('FacilityProfileController', function ($scope, $rootScope) {
     });
-    app.controller('FacilityTournamentsController', function ($scope, $rootScope) {
+    app.controller('FacilityTournamentsController', function ($scope, $rootScope, $location) {
+        $scope.tournaments = Src.TOURNAMENTS;
+        $scope.support = function() {
+            $location.path("facility/tournament/result");
+        };
     });
     app.controller('FacilityTournamentDetailController', function ($scope, $rootScope) {
     });
@@ -363,14 +375,6 @@
         var rounds = Src.ROUNDS;
 
         Brackets.create($(".brackets")[0], players, rounds);
-
-        // $(".brackets").brackets(players, rounds, {});
-        $scope.admin = function() {
-            $rootScope.common.role.changeAdmin();
-        }
-        $scope.facility = function() {
-            $rootScope.common.role.changeFacility();
-        }
     });
     app.controller('JpaUsersController', function ($scope, $rootScope) {
     });

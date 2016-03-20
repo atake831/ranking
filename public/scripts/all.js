@@ -50,7 +50,9 @@
             // $location.path('/home');
             // $location.path('/ranking');
             // $location.path('/profile/1');
-            $location.path('/tournaments');
+            // $location.path('/tournaments');
+            // $location.path('/facility/tournaments');
+            $location.path('/facility/tournament/result');
         });
 
         function changeBackgroundImage(color) {
@@ -71,6 +73,10 @@
             {
                 location: "#/ranking",
                 text: "ランキング"
+            },
+            {
+                location: "#/tournaments",
+                text: "大会一覧"
             },
         ];
         $rootScope.navbarRight = [
@@ -128,7 +134,9 @@
                     ];
                     $rootScope.navbarRight = [
                         {
-                            location: "#/logout",
+                            click: function() {
+                                rootScope.common.logout();
+                            },
                             text: "Logout"
                         },
                     ];
@@ -152,7 +160,9 @@
                     ];
                     $rootScope.navbarRight = [
                         {
-                            location: "#/logout",
+                            click: function() {
+                                rootScope.common.logout();
+                            },
                             text: "Logout"
                         },
                     ];
@@ -204,7 +214,6 @@
     app.controller('RankingController', function ($scope, $rootScope, $location) {
         $scope.players = Src.PLAYERS;
         $scope.profile = function(id) {
-            console.log(id);
             $location.path("profile/" + id);
         };
     });
@@ -226,7 +235,6 @@
             showJoinModal();
         };
         $scope.movie = function() {
-            console.log("movie");
         };
     });
     app.controller('TournamentJoinController', function ($scope, $rootScope, $uibModalInstance, $timeout) {
@@ -348,7 +356,11 @@
     });
     app.controller('FacilityProfileController', function ($scope, $rootScope) {
     });
-    app.controller('FacilityTournamentsController', function ($scope, $rootScope) {
+    app.controller('FacilityTournamentsController', function ($scope, $rootScope, $location) {
+        $scope.tournaments = Src.TOURNAMENTS;
+        $scope.support = function() {
+            $location.path("facility/tournament/result");
+        };
     });
     app.controller('FacilityTournamentDetailController', function ($scope, $rootScope) {
     });
@@ -363,14 +375,6 @@
         var rounds = Src.ROUNDS;
 
         Brackets.create($(".brackets")[0], players, rounds);
-
-        // $(".brackets").brackets(players, rounds, {});
-        $scope.admin = function() {
-            $rootScope.common.role.changeAdmin();
-        }
-        $scope.facility = function() {
-            $rootScope.common.role.changeFacility();
-        }
     });
     app.controller('JpaUsersController', function ($scope, $rootScope) {
     });
@@ -407,7 +411,6 @@
                 }
             }
 
-            console.log(input);
             return input;
         };
     });
@@ -537,7 +540,7 @@
 
     module.factory('Brackets', function(Util) {
         // 奇数にする
-        var PLAYER_BOX_HEIGHT = 25;
+        var PLAYER_BOX_HEIGHT = 57;
         var LINE_BORDER_PX = 1;
         var INITIAL_PLAYER_SPACE = 40;
 
@@ -612,11 +615,24 @@
                 var player_data = this.players.find(function(player) {
                     return player.id == player_id;
                 });
+                var pair_name = [
+                    '佐藤', '鈴木', '高橋', '田中', 
+                    '伊藤', '山本', '渡辺', '中村',
+                    '小林', '加藤', '吉田', '山田',
+                    '佐々木', '山口', '松本', '井上'
+                ];
                 var player = $('<div>', {
                     'class': 'player',
-                    text: player_data.name,
                     'data-id': player_data.id,
                 })[0];
+                player.appendChild($('<p>', {
+                    'class': 'name',
+                    text: player_data.name.split(" ")[0],
+                })[0]);
+                player.appendChild($('<p>', {
+                    'class': 'name',
+                    text: pair_name[player_data.id - 1]
+                })[0]);
                 if ( player_data.url ) {
                     player.click(function() {
                         console.log("player clicked !!");
@@ -1290,26 +1306,26 @@ const Src = (function() {
                 [ 13, 14 ],
                 [ 15, 16 ],
             ],
-            //-- round 2
-            [
-                [ 1, 3, ],
-                [ 5, 7, ],
-                [ 9, 11, ],
-                [ 13, 15, ],
-            ],
-            //-- round 3
-            [
-                [ 1, 5 ],
-                [ 9, 15 ],
-            ],
-            //-- round 4
-            [
-                [ 1, 9 ],
-            ],
-            //-- Champion
-            [
-                [ 9 ]
-            ],
+            // //-- round 2
+            // [
+            //     [ 1, 3, ],
+            //     [ 5, 7, ],
+            //     [ 9, 11, ],
+            //     [ 13, 15, ],
+            // ],
+            // //-- round 3
+            // [
+            //     [ 1, 5 ],
+            //     [ 9, 15 ],
+            // ],
+            // //-- round 4
+            // [
+            //     [ 1, 9 ],
+            // ],
+            // //-- Champion
+            // [
+            //     [ 9 ]
+            // ],
         ]
     };
 })();

@@ -284,6 +284,20 @@ nav {
     }
 }
 
+.facility-tournaments {
+    .facility {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+        min-height: 500px;
+        .info-tournament {
+            color: white;
+            background-color: rgba(0,0,0,0.7);
+            margin-bottom: 0px;
+        }
+    }
+}
+
 .profile {
     background-color: white;
     width: 100%;
@@ -355,21 +369,22 @@ nav {
                     vendor('box-sizing', content-box);
                     border: solid 1px black;
                     border-radius: 5px;
-                    height: 23px;
+                    height: 55px;
                     padding 0px 5px;
-                    line-height: 23px;
+                    line-height: 55px;
                     background-color: #46CFB0;
-                    &.hover {
-                        background-color: #E95546;
-                        color: white;
-                    }
+                    // &.hover {
+                    //     background-color: #E95546;
+                    //     color: white;
+                    // }
                     .name {
                         text-align: center;
                         text-decoration: none;
-                        cursor: pointer;
                         width: 100%;
-                        margin-left: 10px;
                         color: black;
+                        padding: 5px;
+                        margin: 0px;
+                        line-height: 1;
                     }
                     &.champion {
                         position: relative;
@@ -384,7 +399,7 @@ nav {
             position: relative;
             // .round width の -1/2
             margin-left: -75px;
-            width: 180px;
+            width: 160px;
             float: left;
             .line {
                 vendor('box-sizing', content-box);

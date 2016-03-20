@@ -14,7 +14,6 @@
                 }
             }
 
-            console.log(input);
             return input;
         };
     });
@@ -144,7 +143,7 @@
 
     module.factory('Brackets', function(Util) {
         // 奇数にする
-        var PLAYER_BOX_HEIGHT = 25;
+        var PLAYER_BOX_HEIGHT = 57;
         var LINE_BORDER_PX = 1;
         var INITIAL_PLAYER_SPACE = 40;
 
@@ -219,11 +218,24 @@
                 var player_data = this.players.find(function(player) {
                     return player.id == player_id;
                 });
+                var pair_name = [
+                    '佐藤', '鈴木', '高橋', '田中', 
+                    '伊藤', '山本', '渡辺', '中村',
+                    '小林', '加藤', '吉田', '山田',
+                    '佐々木', '山口', '松本', '井上'
+                ];
                 var player = $('<div>', {
                     'class': 'player',
-                    text: player_data.name,
                     'data-id': player_data.id,
                 })[0];
+                player.appendChild($('<p>', {
+                    'class': 'name',
+                    text: player_data.name.split(" ")[0],
+                })[0]);
+                player.appendChild($('<p>', {
+                    'class': 'name',
+                    text: pair_name[player_data.id - 1]
+                })[0]);
                 if ( player_data.url ) {
                     player.click(function() {
                         console.log("player clicked !!");
