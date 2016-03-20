@@ -12,7 +12,7 @@
 
             // 一般ユーザー
             .when('/register', { templateUrl: 'views/register.html' })
-            .when('/profile', { templateUrl: 'views/profile.html' })
+            .when('/profile/:id', { templateUrl: 'views/profile.html' })
             .when('/participate', { templateUrl: 'views/participate.html' })
             .when('/history', { templateUrl: 'views/history.html' })
 
@@ -47,7 +47,9 @@
 
     app.controller('AppController', function($scope, $rootScope, $location, Data, $uibModal) {
         $(document).ready(function(){
-            $location.path('/home');
+            // $location.path('/home');
+            $location.path('/ranking');
+            // $location.path('/profile/0');
             // $location.path('/tournaments');
         });
 
@@ -112,7 +114,7 @@
                             text: "ランキング"
                         },
                         {
-                            location: "#/tournament",
+                            location: "#/profile/0",
                             text: "プロフィール"
                         },
                     ];
@@ -187,8 +189,12 @@
         }
     });
 
-    app.controller('RankingController', function ($scope, $rootScope) {
+    app.controller('RankingController', function ($scope, $rootScope, $location) {
         $scope.players = Src.PLAYERS;
+        $scope.profile = function(id) {
+            console.log(id);
+            $location.path("profile/" + id);
+        };
     });
     app.controller('TournamentsController', function ($scope, $rootScope, Brackets) {
         var players = Src.PLAYERS;
@@ -206,17 +212,80 @@
     });
     app.controller('TournamentDetailController', function ($scope, $rootScope) {
     });
-    app.controller('RegisterController', function ($scope, $rootscope) {
+    app.controller('RegisterController', function ($scope, $rootScope) {
     });
-    app.controller('ProfileController', function ($scope, $rootscope) {
+    app.controller('RacketController', function ($scope, $rootScope, $uibModalInstance) {
+        $scope.close = function() {
+            $uibModalInstance.close();
+        };
     });
-    app.controller('ParticipateController', function ($scope, $rootscope) {
+    app.controller('ProfileController', function ($scope, $rootScope, $routeParams, $uibModal) {
+        $scope.player = Src.PLAYERS[$routeParams.id - 1];
+
+        function showRacketModal() {
+            $uibModal.open({
+                templateUrl: 'views/racket.html',
+                controller: 'RacketController',
+                backdrop: true,
+                scope: $scope,
+            });
+        }
+
+        $scope.racket = function() {
+            showRacketModal();
+        };
+
+        var data = {
+            labels: ["2015年6月", "7月", "8月", "9月", "10月", "11月", "12月", "2016年1月", "2月", "3月"],
+            datasets: [
+                {
+                    label: "ランキングの推移",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: [-48, -37, -42, -33, -22, -15, -19, -7, 0, 0]
+                },
+            ]
+        };
+
+        var ctx = document.getElementById("rankingChart").getContext("2d");
+        var options = {
+            scaleOverride: true,
+            scaleSteps: 5,
+            scaleStepWidth : 10,
+            scaleStartValue: -50,
+            bezierCurve : false,
+            tooltipTemplate: function(label) {
+                if ( label.value == 0 ) {
+                    return 1 + "位";
+                }
+                else {
+                    return -label.value + "位";
+                }
+            },
+            scaleLabel: function(label) {
+                if ( label.value == 0 ) {
+                    return 1 + "位";
+                }
+                else {
+                    return -label.value + "位";
+                }
+            },
+        };
+        var lineChart = new Chart(ctx).Line(data, options);
+
+
     });
-    app.controller('HistoryController', function ($scope, $rootscope) {
+    app.controller('ParticipateController', function ($scope, $rootScope) {
     });
-    app.controller('FacilityRegisterController', function ($scope, $rootscope) {
+    app.controller('HistoryController', function ($scope, $rootScope) {
     });
-    app.controller('FacilityProfileController', function ($scope, $rootscope) {
+    app.controller('FacilityRegisterController', function ($scope, $rootScope) {
+    });
+    app.controller('FacilityProfileController', function ($scope, $rootScope) {
     });
     app.controller('FacilityTournamentsController', function ($scope, $rootScope) {
     });

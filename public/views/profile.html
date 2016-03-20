@@ -1,6 +1,75 @@
 
 <div ng-controller="ProfileController">
   <div class="container">
-    <p>profile</p>
+    <div class="profile">
+      <h4>{{ player.name }}</h4>
+      <div class="line"></div>
+      <div class="profile-wrapper">
+        <div class="image"><img ng-src="{{ player.image }}"/></div>
+        <div class="profile">
+          <p>ランキング<span>{{ player.rank }}</span></p>
+          <p>ポイント<span>{{ player.point }}</span></p>
+          <p>性別<span>{{ player.sex | sex_str }}</span></p>
+          <p>年齢<span>{{ player.age }}</span></p>
+          <p>利き手<span>右</span></p>
+          <p>使用ラケット<span ng-click="racket()" class="clickable-text">Adidas Power Precision Challenge</span></p>
+          <p>所属<span>日本パデルスクール</span></p>
+        </div>
+      </div>
+      <div class="ranking-transition-wrapper">
+        <h6>ランキングの推移</h6>
+        <canvas id="rankingChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="record tabs">
+      <uib-tabset active="active">
+        <uib-tab index="0" heading="過去の大会">
+          <div class="ranking">
+            <table>
+              <thead>
+                <tr>
+                  <th>日付</th>
+                  <th>グレード</th>
+                  <th>大会名</th>
+                  <th>順位</th>
+                  <th>獲得ポイント</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="history in player.histories | add_tournament_detail">
+                  <td>{{ history.tournament.date }}</td>
+                  <td>{{ history.tournament.grade_id | grade_name }}</td>
+                  <td>{{ history.tournament.name }}</td>
+                  <td>{{ history.rank }}</td>
+                  <td>{{ history.point }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </uib-tab>
+        <uib-tab index="1" heading="出場予定の大会">
+          <div class="ranking">
+            <table>
+              <thead>
+                <tr>
+                  <th>日付</th>
+                  <th>グレード</th>
+                  <th>大会名</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="history in player.schedule | add_tournament_detail">
+                  <td>{{ history.tournament.date }}</td>
+                  <td>{{ history.tournament.grade_id | grade_name }}</td>
+                  <td>{{ history.tournament.name }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+    </div>
   </div>
 </div>

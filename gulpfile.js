@@ -106,7 +106,8 @@ gulp.task('concat-js-lib', function() {
       'bower_components/flat-ui/dist/js/flat-ui.min.js',
       'bower_components/scroll-up-bar/dist/scroll-up-bar.js',
       'bower_components/angular-bootstrap/ui-bootstrap.min.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+      'bower_components/Chart.js/Chart.min.js'
     ])
     .pipe($.concat('vendors.js'))
     .pipe(gulp.dest(__dirname + '/public/lib/'));

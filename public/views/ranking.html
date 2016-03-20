@@ -1,6 +1,6 @@
 
 <div ng-controller="RankingController">
-  <div class="container">
+  <div class="container tabs">
     <h3>ランキング</h3>
     <uib-tabset active="active">
       <uib-tab index="0" heading="man">
@@ -17,7 +17,7 @@
             <tbody>
               <tr ng-repeat="player in players | man">
                 <td>{{ player.rank }}</td>
-                <td>{{ player.name }}</td>
+                <td> <span ng-click="profile(player.id)" class="clickable-text">{{ player.name }}</span></td>
                 <td>{{ player.age }}</td>
                 <td>{{ player.point }}</td>
               </tr>

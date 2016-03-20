@@ -1,6 +1,45 @@
 (function() {
     var module = angular.module('ranking', []);
 
+    module.filter('add_tournament_detail', function() {
+        return function(input) {
+            for ( var i = 0 ; i < input.length ; i++ ) {
+                for ( var j = 0 ; j < Src.TOURNAMENTS.length ; j++ ) {
+                    if ( input[i].tournament_id == 
+                         Src.TOURNAMENTS[j].id )
+                    {
+                        input[i].tournament = Src.TOURNAMENTS[j];
+                        break;
+                    }
+                }
+            }
+
+            console.log(input);
+            return input;
+        };
+    });
+
+    module.filter('grade_name', function() {
+        return function(grade_id) {
+            for ( var i = 0 ; i < Src.TOURNAMENT_GRADE.length ; i++ ) {
+                if ( grade_id == Src.TOURNAMENT_GRADE[i].id ) {
+                    return Src.TOURNAMENT_GRADE[i].name;
+                }
+            }
+        };
+    });
+
+    module.filter('sex_str', function() {
+        return function(sex) {
+            if ( sex == 1 ) {
+                return "男";
+            }
+            else {
+                return "女";
+            }
+        };
+    });
+
     module.filter('man', function() {
         return function(players) {
             return $.grep(players, function(player) {

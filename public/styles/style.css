@@ -43,13 +43,14 @@ nav {
 .main-content {
   margin: 53px auto auto auto;
   padding: 20px 0px 0px 0px;
-  width: 90%;
+  width: 75%;
   height: 1000px;
 }
 .container {
   width: 100%;
   padding: 30px;
   margin: 0px;
+  margin-bottom: 20px;
   background-color: #fff;
   box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.24);
 }
@@ -77,12 +78,30 @@ nav {
   right: 10px;
   top: 10px;
 }
-.home a {
+.racket {
+  padding: 30px;
+}
+.racket div {
+  text-align: center;
+}
+.racket img {
+  width: 70%;
+}
+.racket button {
+  margin-left: 10px;
+  width: 80%;
+}
+.racket .close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.tabs a {
   color: #555;
 }
-.home li.active a,
-.home li.active a:focus,
-.home li.active a:hover {
+.tabs li.active a,
+.tabs li.active a:focus,
+.tabs li.active a:hover {
   background-color: #f8f8f8;
   color: #16a085;
 }
@@ -107,6 +126,59 @@ nav {
 }
 .ranking table td:last-child {
   border-right: none;
+}
+.line {
+  border-bottom: 1px solid #e67e22;
+}
+.clickable-text {
+  color: #1a0dab;
+  padding: 0px;
+  font-size: inherit;
+  cursor: pointer;
+}
+.profile {
+  background-color: #fff;
+  width: 100%;
+}
+.profile h4 {
+  margin-bottom: 0px;
+}
+.profile .profile-wrapper {
+  padding: 30px;
+}
+.profile .profile-wrapper .image {
+  float: left;
+  width: 50%;
+}
+.profile .profile-wrapper .image img {
+  max-width: 80%;
+}
+.profile .profile-wrapper .profile {
+  width: 50%;
+  float: right;
+  margin-top: 6px;
+}
+.profile .profile-wrapper .profile p {
+  border-bottom: 1.5px solid #1abc9c;
+}
+.profile .profile-wrapper .profile p:last-child {
+  margin-bottom: 0px;
+}
+.profile .profile-wrapper .profile span {
+  float: right;
+}
+.profile .ranking-transition-wrapper {
+  clear: both;
+  padding: 30px;
+  text-align: center;
+}
+.profile .ranking-transition-wrapper canvas {
+  width: 100%;
+  height: 250px;
+}
+.record {
+  background-color: #fff;
+  width: 100%;
 }
 .bracket-container {
   margin-top: 10px;

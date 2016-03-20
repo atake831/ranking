@@ -1,3 +1,60 @@
 div(ng-controller="ProfileController")
   div.container
-    p profile
+    div.profile
+      h4 {{ player.name }}
+      div.line
+      div.profile-wrapper
+        div.image
+          img(ng-src="{{ player.image }}")
+        div.profile
+          p ランキング
+            span {{ player.rank }}
+          p ポイント
+            span {{ player.point }}
+          p 性別
+            span {{ player.sex | sex_str }}
+          p 年齢
+            span {{ player.age }}
+          p 利き手
+            span 右
+          p 使用ラケット
+            span.clickable-text(ng-click="racket()") Adidas Power Precision Challenge
+          p 所属
+            span 日本パデルスクール
+      div.ranking-transition-wrapper
+        h6 ランキングの推移
+        canvas(id="rankingChart")
+
+  div.container
+    div.record.tabs
+      uib-tabset(active="active")
+        uib-tab(index="0" heading="過去の大会")
+          div.ranking
+            table
+              thead
+                tr
+                  th 日付
+                  th グレード
+                  th 大会名
+                  th 順位
+                  th 獲得ポイント
+              tbody
+                tr(ng-repeat="history in player.histories | add_tournament_detail")
+                  td {{ history.tournament.date }}
+                  td {{ history.tournament.grade_id | grade_name }}
+                  td {{ history.tournament.name }}
+                  td {{ history.rank }}
+                  td {{ history.point }}
+        uib-tab(index="1" heading="出場予定の大会")
+          div.ranking
+            table
+              thead
+                tr
+                  th 日付
+                  th グレード
+                  th 大会名
+              tbody
+                tr(ng-repeat="history in player.schedule | add_tournament_detail")
+                  td {{ history.tournament.date }}
+                  td {{ history.tournament.grade_id | grade_name }}
+                  td {{ history.tournament.name }}
