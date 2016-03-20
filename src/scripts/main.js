@@ -52,10 +52,10 @@
         });
 
         function changeBackgroundImage(color) {
-            $('body').css(
-                'background-image', 
-                "url('../images/background-image-" + color + ".png')"
-            );
+            $.each(['gray', 'yellow', 'blue'], function(index, value) {
+                $('body').removeClass(value);
+            });
+            $('body').addClass(color);
         }
         function showSigninModal() {
             $uibModal.open({
@@ -67,12 +67,8 @@
         }
         $rootScope.navbarLeft = [
             {
-                location: "#/tournament",
-                text: "トーナメント"
-            },
-            {
-                location: "#/tournament",
-                text: "トーナメント"
+                location: "#/ranking",
+                text: "ランキング"
             },
         ];
         $rootScope.navbarRight = [
@@ -83,9 +79,12 @@
         ];
 
         Data.currentRole = 'user';
+        var rootScope = $rootScope;
         $rootScope.common = {
             logout: function() {
-                this.showLogin();
+                alert("ログアウトしました");
+                rootScope.common.role.changeLogoutUser();
+                $location.path('/home');
             },
             role: {
                 changeLogoutUser: function() {
@@ -93,8 +92,8 @@
                     changeBackgroundImage('gray');
                     $rootScope.navbarLeft = [
                         {
-                            location: "#/tournament",
-                            text: "トーナメント"
+                            location: "#/ranking",
+                            text: "ランキング"
                         },
                     ];
                     $rootScope.navbarRight = [
@@ -109,8 +108,8 @@
                     changeBackgroundImage('gray');
                     $rootScope.navbarLeft = [
                         {
-                            location: "#/tournament",
-                            text: "トーナメント"
+                            location: "#/ranking",
+                            text: "ランキング"
                         },
                         {
                             location: "#/tournament",
@@ -146,7 +145,7 @@
                 },
                 changeAdmin: function() {
                     Data.currentRole = 'admin';
-                    changeBackgroundImage('red');
+                    changeBackgroundImage('yellow');
                     $rootScope.navbarLeft = [
                         {
                             location: "#/facilities",
@@ -159,7 +158,9 @@
                     ];
                     $rootScope.navbarRight = [
                         {
-                            location: "#/logout",
+                            click: function() {
+                                rootScope.common.logout();
+                            },
                             text: "Logout"
                         },
                     ];
@@ -187,6 +188,7 @@
     });
 
     app.controller('RankingController', function ($scope, $rootScope) {
+        $scope.players = Src.PLAYERS;
     });
     app.controller('TournamentsController', function ($scope, $rootScope, Brackets) {
         var players = Src.PLAYERS;
@@ -243,21 +245,6 @@
     });
 
     app.controller('HomeController', function ($scope, $rootScope, $location, Data)  {
-        $scope.tournament = function() {
-            $location.path('/tournaments');
-        }
-        $scope.logout = function() {
-            $rootScope.common.role.changeLogoutUser();
-        }
-        $scope.login = function() {
-            $rootScope.common.role.changeLoggedinUser();
-        }
-        $scope.admin = function() {
-            $rootScope.common.role.changeAdmin();
-        }
-        $scope.facility = function() {
-            $rootScope.common.role.changeFacility();
-        }
     });
 
 })();

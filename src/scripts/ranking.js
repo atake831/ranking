@@ -1,6 +1,21 @@
 (function() {
     var module = angular.module('ranking', []);
 
+    module.filter('man', function() {
+        return function(players) {
+            return $.grep(players, function(player) {
+                return player.sex == 1;
+            });
+        };
+    });
+    module.filter('woman', function() {
+        return function(players) {
+            return $.grep(players, function(player) {
+                return player.sex == 2;
+            });
+        };
+    });
+
     module.run(function($http) {
     });
 

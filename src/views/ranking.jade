@@ -1,3 +1,34 @@
 div(ng-controller="RankingController")
   div.container
-    p ranking
+    h3 ランキング
+    uib-tabset(active="active")
+      uib-tab(index="0" heading="man")
+        div.ranking
+          table
+            thead
+              tr
+                th ranking
+                th player
+                th age
+                th point
+            tbody
+              tr(ng-repeat="player in players | man")
+                td {{ player.rank }}
+                td {{ player.name }}
+                td {{ player.age }}
+                td {{ player.point }}
+      uib-tab(index="1" heading="woman")
+        div.ranking
+          table
+            thead
+              tr
+                th ranking
+                th player
+                th age
+                th point
+            tbody
+              tr(ng-repeat="player in players | woman")
+                td {{ player.rank }}
+                td {{ player.name }}
+                td {{ player.age }}
+                td {{ player.point }}

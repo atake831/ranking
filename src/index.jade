@@ -5,18 +5,17 @@ html(lang="en" ng-app="app" ng-csp)
     meta(name="apple-mobile-web-app-capable" content="yes")
     meta(name="mobile-web-app-capable" content="yes")
 
-    <!-- JS dependencies (order matters!) -->
-    script(src="lib/vendors.js")
-    script(src="scripts/all.js")
-
     <!-- CSS dependencies -->
     link(rel="stylesheet" href="lib/vendors.css")
     link(rel="stylesheet" href="styles/style.css")
 
+    <!-- JS dependencies (order matters!) -->
+    script(src="lib/vendors.js")
+    script(src="scripts/all.js")
     title ランキング
 
   body(ng-controller="AppController")
-    nav.navbar.navbar-inverse.navbar-embossed(role="navigation" style="position: absolute; top: 0; left: 0; width: 100%; border-radius: 0px;" id="topbar")
+    nav.navbar.navbar-embossed.scrollupbar(role="navigation" id="topbar")
       div.navbar-header
         button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01")
           span.sr-only Toggle navigation

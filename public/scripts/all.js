@@ -52,10 +52,10 @@
         });
 
         function changeBackgroundImage(color) {
-            $('body').css(
-                'background-image', 
-                "url('../images/background-image-" + color + ".png')"
-            );
+            $.each(['gray', 'yellow', 'blue'], function(index, value) {
+                $('body').removeClass(value);
+            });
+            $('body').addClass(color);
         }
         function showSigninModal() {
             $uibModal.open({
@@ -67,12 +67,8 @@
         }
         $rootScope.navbarLeft = [
             {
-                location: "#/tournament",
-                text: "トーナメント"
-            },
-            {
-                location: "#/tournament",
-                text: "トーナメント"
+                location: "#/ranking",
+                text: "ランキング"
             },
         ];
         $rootScope.navbarRight = [
@@ -83,9 +79,12 @@
         ];
 
         Data.currentRole = 'user';
+        var rootScope = $rootScope;
         $rootScope.common = {
             logout: function() {
-                this.showLogin();
+                alert("ログアウトしました");
+                rootScope.common.role.changeLogoutUser();
+                $location.path('/home');
             },
             role: {
                 changeLogoutUser: function() {
@@ -93,8 +92,8 @@
                     changeBackgroundImage('gray');
                     $rootScope.navbarLeft = [
                         {
-                            location: "#/tournament",
-                            text: "トーナメント"
+                            location: "#/ranking",
+                            text: "ランキング"
                         },
                     ];
                     $rootScope.navbarRight = [
@@ -109,8 +108,8 @@
                     changeBackgroundImage('gray');
                     $rootScope.navbarLeft = [
                         {
-                            location: "#/tournament",
-                            text: "トーナメント"
+                            location: "#/ranking",
+                            text: "ランキング"
                         },
                         {
                             location: "#/tournament",
@@ -146,7 +145,7 @@
                 },
                 changeAdmin: function() {
                     Data.currentRole = 'admin';
-                    changeBackgroundImage('red');
+                    changeBackgroundImage('yellow');
                     $rootScope.navbarLeft = [
                         {
                             location: "#/facilities",
@@ -159,7 +158,9 @@
                     ];
                     $rootScope.navbarRight = [
                         {
-                            location: "#/logout",
+                            click: function() {
+                                rootScope.common.logout();
+                            },
                             text: "Logout"
                         },
                     ];
@@ -187,6 +188,7 @@
     });
 
     app.controller('RankingController', function ($scope, $rootScope) {
+        $scope.players = Src.PLAYERS;
     });
     app.controller('TournamentsController', function ($scope, $rootScope, Brackets) {
         var players = Src.PLAYERS;
@@ -243,27 +245,27 @@
     });
 
     app.controller('HomeController', function ($scope, $rootScope, $location, Data)  {
-        $scope.tournament = function() {
-            $location.path('/tournaments');
-        }
-        $scope.logout = function() {
-            $rootScope.common.role.changeLogoutUser();
-        }
-        $scope.login = function() {
-            $rootScope.common.role.changeLoggedinUser();
-        }
-        $scope.admin = function() {
-            $rootScope.common.role.changeAdmin();
-        }
-        $scope.facility = function() {
-            $rootScope.common.role.changeFacility();
-        }
     });
 
 })();
 
 (function() {
     var module = angular.module('ranking', []);
+
+    module.filter('man', function() {
+        return function(players) {
+            return $.grep(players, function(player) {
+                return player.sex == 1;
+            });
+        };
+    });
+    module.filter('woman', function() {
+        return function(players) {
+            return $.grep(players, function(player) {
+                return player.sex == 2;
+            });
+        };
+    });
 
     module.run(function($http) {
     });
@@ -536,22 +538,22 @@
 const Src = (function() {
     return {
         PLAYERS: [
-             { id: 1,  name: "Player 1" },
-             { id: 2,  name: "Player 2" },
-             { id: 3,  name: "Player 3" },
-             { id: 4,  name: "Player 4" },
-             { id: 5,  name: "Player 5" },
-             { id: 6,  name: "Player 6" },
-             { id: 7,  name: "Player 7" },
-             { id: 8,  name: "Player 8" },
-             { id: 9,  name: "Player 9" },
-             { id: 10, name: "Player 10" },
-             { id: 11, name: "Player 11" },
-             { id: 12, name: "Player 12" },
-             { id: 13, name: "Player 13" },
-             { id: 14, name: "Player 14" },
-             { id: 15, name: "Player 15" },
-             { id: 16, name: "Player 16" },
+             { id: 1,  name: "竹口 輝", rank: 1, point: 10000, age: 26, sex: 1, image: "https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/c0.120.331.331/s320x320/185331_108322522601186_1272144_n.jpg?oh=6cf3f0c19ab79185db3b1eb8a0751d0b&oe=57936893" },
+             { id: 2,  name: "MARIA JOSE SANCHEZ ALAYETO", rank: 1, point: 10000, age: 23, sex: 2, image: "https://scontent.xx.fbcdn.net/hprofile-xla1/v/t1.0-1/c94.0.320.320/p320x320/1379841_10150004552801901_469209496895221757_n.jpg?oh=052b1386484925c65d535ea215a96479&oe=57808AA7" },
+             { id: 3,  name: "FERNANDO BELASTEGUIN", rank: 2, point: 8000, age: 36, sex: 1, image: "https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/c94.0.320.320/p320x320/10354686_10150004552801856_220367501106153455_n.jpg?oh=387283eef5f81b2a337459cdf366ac6f&oe=57978DDE"},
+             { id: 4,  name: "MARIA PILAR SANCHEZ ALAYETO", rank: 2, point: 8000, age: 23, sex: 2, image: "https://scontent.xx.fbcdn.net/hprofile-xla1/v/t1.0-1/c94.0.320.320/p320x320/1379841_10150004552801901_469209496895221757_n.jpg?oh=052b1386484925c65d535ea215a96479&oe=57808AA7" },
+             { id: 5,  name: "PABLO LIMA", rank: 3, point: 6000, age: 32, sex: 1, image: "https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/c94.0.320.320/p320x320/10354686_10150004552801856_220367501106153455_n.jpg?oh=387283eef5f81b2a337459cdf366ac6f&oe=57978DDE"},
+             { id: 6,  name: "ALEJANDRA SALAZAR BENGOECHEA", rank: 3, point: 6000, age: 23, sex: 2, image: "https://scontent.xx.fbcdn.net/hprofile-xla1/v/t1.0-1/c94.0.320.320/p320x320/1379841_10150004552801901_469209496895221757_n.jpg?oh=052b1386484925c65d535ea215a96479&oe=57808AA7" },
+             { id: 7,  name: "FRANCISCO NAVARRO COMPAN", rank: 4, point: 4000, age: 28, sex: 1, image: "https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/c94.0.320.320/p320x320/10354686_10150004552801856_220367501106153455_n.jpg?oh=387283eef5f81b2a337459cdf366ac6f&oe=57978DDE"},
+             { id: 8,  name: "MARTA MARRERO MARRERO", rank: 4, point: 4000, age: 23, sex: 2, image: "https://scontent.xx.fbcdn.net/hprofile-xla1/v/t1.0-1/c94.0.320.320/p320x320/1379841_10150004552801901_469209496895221757_n.jpg?oh=052b1386484925c65d535ea215a96479&oe=57808AA7" },
+             { id: 9,  name: "MATIAS DIAZ SANGIORGIO", rank: 5, point: 2000, age: 24, sex: 1, image: "https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/c94.0.320.320/p320x320/10354686_10150004552801856_220367501106153455_n.jpg?oh=387283eef5f81b2a337459cdf366ac6f&oe=57978DDE"},
+             { id: 10,  name: "ELISABETH AMATRIAIN ARMAS", rank: 5, point: 2000, age: 25, sex: 2, image: "https://scontent.xx.fbcdn.net/hprofile-xla1/v/t1.0-1/c94.0.320.320/p320x320/1379841_10150004552801901_469209496895221757_n.jpg?oh=052b1386484925c65d535ea215a96479&oe=57808AA7" },
+             { id: 11,  name: "CARLOS DANIEL GUTIERREZ", rank: 6, point: 1000, age: 20, sex: 1, image: "https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/c94.0.320.320/p320x320/10354686_10150004552801856_220367501106153455_n.jpg?oh=387283eef5f81b2a337459cdf366ac6f&oe=57978DDE"},
+             { id: 12,  name: "PATRICIA LLAGUNO ZIELINSKI", rank: 6, point: 1000, age: 33, sex: 2, image: "https://scontent.xx.fbcdn.net/hprofile-xla1/v/t1.0-1/c94.0.320.320/p320x320/1379841_10150004552801901_469209496895221757_n.jpg?oh=052b1386484925c65d535ea215a96479&oe=57808AA7" },
+             { id: 13,  name: "JUAN MIERES PETRUF", rank: 7, point: 800, age: 24, sex: 1, image: "https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/c94.0.320.320/p320x320/10354686_10150004552801856_220367501106153455_n.jpg?oh=387283eef5f81b2a337459cdf366ac6f&oe=57978DDE"},
+             { id: 14,  name: "CATALINA TENORIO", rank: 7, point: 800, age: 24, sex: 2, image: "https://scontent.xx.fbcdn.net/hprofile-xla1/v/t1.0-1/c94.0.320.320/p320x320/1379841_10150004552801901_469209496895221757_n.jpg?oh=052b1386484925c65d535ea215a96479&oe=57808AA7" },
+             { id: 15,  name: "MAXIMILIANO SANCHEZ", rank: 8, point: 500, age: 20, sex: 1, image: "https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/c94.0.320.320/p320x320/10354686_10150004552801856_220367501106153455_n.jpg?oh=387283eef5f81b2a337459cdf366ac6f&oe=57978DDE"},
+             { id: 16,  name: "CECILIA REITER", rank: 8, point: 500, age: 19, sex: 2, image: "https://scontent.xx.fbcdn.net/hprofile-xla1/v/t1.0-1/c94.0.320.320/p320x320/1379841_10150004552801901_469209496895221757_n.jpg?oh=052b1386484925c65d535ea215a96479&oe=57808AA7" },
         ],
         ROUNDS: [
             //-- round 1

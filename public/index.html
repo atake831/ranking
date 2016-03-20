@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="mobile-web-app-capable" content="yes"/><!-- JS dependencies (order matters!) -->
-    <script src="lib/vendors.js"></script>
-    <script src="scripts/all.js"></script><!-- CSS dependencies -->
+    <meta name="mobile-web-app-capable" content="yes"/><!-- CSS dependencies -->
     <link rel="stylesheet" href="lib/vendors.css"/>
-    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="styles/style.css"/><!-- JS dependencies (order matters!) -->
+    <script src="lib/vendors.js"></script>
+    <script src="scripts/all.js"></script>
     <title>ランキング</title>
   </head>
   <body ng-controller="AppController">
-    <nav role="navigation" style="position: absolute; top: 0; left: 0; width: 100%; border-radius: 0px;" id="topbar" class="navbar navbar-inverse navbar-embossed">
+    <nav role="navigation" id="topbar" class="navbar navbar-embossed scrollupbar">
       <div class="navbar-header">
         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-01" class="navbar-toggle"><span class="sr-only">Toggle navigation</span></button><a href="#" class="navbar-brand">JPA</a>
       </div>

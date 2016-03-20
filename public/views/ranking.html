@@ -1,6 +1,52 @@
 
 <div ng-controller="RankingController">
   <div class="container">
-    <p>ranking</p>
+    <h3>ランキング</h3>
+    <uib-tabset active="active">
+      <uib-tab index="0" heading="man">
+        <div class="ranking">
+          <table>
+            <thead>
+              <tr>
+                <th>ranking</th>
+                <th>player</th>
+                <th>age</th>
+                <th>point</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="player in players | man">
+                <td>{{ player.rank }}</td>
+                <td>{{ player.name }}</td>
+                <td>{{ player.age }}</td>
+                <td>{{ player.point }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </uib-tab>
+      <uib-tab index="1" heading="woman">
+        <div class="ranking">
+          <table>
+            <thead>
+              <tr>
+                <th>ranking</th>
+                <th>player</th>
+                <th>age</th>
+                <th>point</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="player in players | woman">
+                <td>{{ player.rank }}</td>
+                <td>{{ player.name }}</td>
+                <td>{{ player.age }}</td>
+                <td>{{ player.point }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </uib-tab>
+    </uib-tabset>
   </div>
 </div>
