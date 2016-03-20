@@ -1,0 +1,17 @@
+div.join-modal
+  div.close
+    span.fui-cross(ng-click="close()")
+  div.pair
+    span ペア名を入力してください
+    input(ng-model="input" ng-change="change()")
+    div.candidate
+      p(ng-repeat="name in candidates")
+        span(ng-click="complete(name)") {{ name | first_name }}
+
+  div.credit
+    span クレジットカード決済
+    select.form-control.select.select-primary(data-toggle="select")
+      option(value="0") VISA *******
+      option(value="1") MASTER *****
+  div.text-center
+    button.btn.btn-primary(ng-click="join()") 参加する

@@ -48,9 +48,9 @@
     app.controller('AppController', function($scope, $rootScope, $location, Data, $uibModal) {
         $(document).ready(function(){
             // $location.path('/home');
-            $location.path('/ranking');
-            // $location.path('/profile/0');
-            // $location.path('/tournaments');
+            // $location.path('/ranking');
+            // $location.path('/profile/1');
+            $location.path('/tournaments');
         });
 
         function changeBackgroundImage(color) {
@@ -97,6 +97,10 @@
                             location: "#/ranking",
                             text: "ランキング"
                         },
+                        {
+                            location: "#/tournaments",
+                            text: "大会一覧"
+                        },
                     ];
                     $rootScope.navbarRight = [
                         {
@@ -114,7 +118,11 @@
                             text: "ランキング"
                         },
                         {
-                            location: "#/profile/0",
+                            location: "#/tournaments",
+                            text: "大会一覧"
+                        },
+                        {
+                            location: "#/profile/1",
                             text: "プロフィール"
                         },
                     ];
@@ -130,12 +138,16 @@
                     changeBackgroundImage('blue');
                     $rootScope.navbarLeft = [
                         {
-                            location: "#/my_tournament",
+                            location: "#/facility/profile",
+                            text: "施設情報"
+                        },
+                        {
+                            location: "#/facility/tournaments",
                             text: "運営トーナメント"
                         },
                         {
-                            location: "#/creat_tournament",
-                            text: "トーナメント作成"
+                            location: "#/facility/tournament/result",
+                            text: "当日サポート"
                         },
                     ];
                     $rootScope.navbarRight = [
@@ -196,21 +208,70 @@
             $location.path("profile/" + id);
         };
     });
-    app.controller('TournamentsController', function ($scope, $rootScope, Brackets) {
-        var players = Src.PLAYERS;
-        var rounds = Src.ROUNDS;
+    app.controller('TournamentsController', function ($scope, $rootScope, $uibModal) {
+        $scope.tournaments = Src.TOURNAMENTS;
 
-        Brackets.create($(".brackets")[0], players, rounds);
+        $('.hcaption').hcaptions();
 
-        // $(".brackets").brackets(players, rounds, {});
-        $scope.admin = function() {
-            $rootScope.common.role.changeAdmin();
+        function showJoinModal() {
+            $uibModal.open({
+                templateUrl: 'views/tournament/join.html',
+                controller: 'TournamentJoinController',
+                backdrop: true,
+                scope: $scope,
+            });
         }
-        $scope.facility = function() {
-            $rootScope.common.role.changeFacility();
-        }
+
+        $scope.join = function() {
+            showJoinModal();
+        };
+        $scope.movie = function() {
+            console.log("movie");
+        };
     });
-    app.controller('TournamentDetailController', function ($scope, $rootScope) {
+    app.controller('TournamentJoinController', function ($scope, $rootScope, $uibModalInstance, $timeout) {
+        $scope.join = function() {
+        };
+        $scope.close = function() {
+            $uibModalInstance.close();
+        };
+        var source = [
+          "ActionScript",
+          "AppleScript",
+          "Asp",
+          "BASIC",
+          "C",
+          "C++",
+          "Clojure",
+          "COBOL",
+          "ColdFusion",
+          "Erlang",
+          "Fortran",
+          "Groovy",
+          "Haskell",
+          "Java",
+          "JavaScript",
+          "Lisp",
+          "Perl",
+          "PHP",
+          "Python",
+          "Ruby",
+          "Scala",
+          "Scheme"
+        ];
+        $scope.change = function() {
+            var candidates = [];
+            for ( var i = 0 ; i < Src.PLAYERS.length ; i++ ) {
+                if ( Src.PLAYERS[i].name.toLowerCase().includes($scope.input.toLowerCase()) ) {
+                    candidates.push(Src.PLAYERS[i].name);
+                }
+            }
+            $scope.candidates = candidates;
+        };
+        $scope.complete = function(name) {
+            $scope.input = name.split(" ")[0];
+            $scope.candidates = [];
+        };
     });
     app.controller('RegisterController', function ($scope, $rootScope) {
     });
@@ -297,7 +358,19 @@
     });
     app.controller('FacilityTournamentManageController', function ($scope, $rootScope) {
     });
-    app.controller('FacilityTournamentResultController', function ($scope, $rootScope) {
+    app.controller('FacilityTournamentResultController', function ($scope, $rootScope, Brackets) {
+        var players = Src.PLAYERS;
+        var rounds = Src.ROUNDS;
+
+        Brackets.create($(".brackets")[0], players, rounds);
+
+        // $(".brackets").brackets(players, rounds, {});
+        $scope.admin = function() {
+            $rootScope.common.role.changeAdmin();
+        }
+        $scope.facility = function() {
+            $rootScope.common.role.changeFacility();
+        }
     });
     app.controller('JpaUsersController', function ($scope, $rootScope) {
     });

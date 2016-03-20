@@ -1,7 +1,63 @@
 div(ng-controller="TournamentsController")
   div.container
-    button.btn.btn-primary(ng-click="admin()") admin
-    button.btn.btn-primary(ng-click="facility()") facility
-    div.bracket-container
-      div.brackets
+    h3 大会一覧
+    div.tournament-container-wrapper
+      div.tournament-container.grade-1(ng-click="join()")
+        a.hcaption(data-target="#detail1" cap-effect="fade")
+          img(src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg")
+          div.info
+            p 
+              span 2016/03/30  
+              span.grade-1 JPAマスターズ  
+              span 所沢  
+              span.capacity 定員8/10
+        div.content(id="detail1")
+          p 今年最初のJPAマスターズ！ディフェンディングチャンピオンでありランキング1, 2位の竹口ペアを倒し、新たな勝者は現れるのか？！
+          p.movie 過去の大会動画は
+            span こちら
+          button.join.btn.btn-primary 参加する
 
+      div.tournament-container.grade-2
+        a.hcaption(data-target="#detail2" cap-effect="fade")
+          img(src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg")
+          div.info
+            p 
+              span 2016/04/03
+              span.grade-2 オープン
+              span 所沢  
+              span.capacity 定員8/10
+        div.content(id="detail2")
+          p 今年最初のオープン大会！今年のトロフィーは誰の手に渡るのか？！
+          p.movie 過去の大会動画は
+            span こちら
+          button.join.btn.btn-primary(ng-click="join()") 参加する
+
+      div.tournament-container.grade-3
+        a.hcaption(data-target="#detail3" cap-effect="fade")
+          img(src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg")
+          div.info
+            p 
+              span 2016/04/12
+              span.grade-3 チャレンジャー
+              span 所沢  
+              span.capacity 定員5/10
+        div.content(id="detail3")
+          p 今年最初のチャレンジャー大会！今年のトロフィーは誰の手に渡るのか？！
+          p.movie 過去の大会動画は
+            span こちら
+          button.join.btn.btn-primary(ng-click="join()") 参加する
+
+      div.tournament-container.grade-4
+        a.hcaption(data-target="#detail4" cap-effect="fade")
+          img(src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg")
+          div.info
+            p 
+              span 2016/05/05
+              span.grade-4 ビギナー
+              span 所沢  
+              span.capacity 定員2/10
+        div.content(id="detail4")
+          p 今年最初のビギナー大会！まずはここから力を伸ばしていこう！初心者大歓迎！
+          p.movie 過去の大会動画は
+            span こちら
+          button.join.btn.btn-primary(ng-click="join()") 参加する

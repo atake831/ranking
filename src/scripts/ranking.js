@@ -29,6 +29,12 @@
         };
     });
 
+    module.filter('first_name', function() {
+        return function(name) {
+            return name.split(" ")[0];
+        };
+    });
+
     module.filter('sex_str', function() {
         return function(sex) {
             if ( sex == 1 ) {

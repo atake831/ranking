@@ -1,10 +1,48 @@
 
 <div ng-controller="TournamentsController">
   <div class="container">
-    <button ng-click="admin()" class="btn btn-primary">admin</button>
-    <button ng-click="facility()" class="btn btn-primary">facility</button>
-    <div class="bracket-container">
-      <div class="brackets"></div>
+    <h3>大会一覧</h3>
+    <div class="tournament-container-wrapper">
+      <div ng-click="join()" class="tournament-container grade-1"><a data-target="#detail1" cap-effect="fade" class="hcaption"><img src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg"/>
+          <div class="info">
+            <p> <span>2016/03/30  </span><span class="grade-1">JPAマスターズ  </span><span>所沢  </span><span class="capacity">定員8/10</span></p>
+          </div></a>
+        <div id="detail1" class="content">
+          <p>今年最初のJPAマスターズ！ディフェンディングチャンピオンでありランキング1, 2位の竹口ペアを倒し、新たな勝者は現れるのか？！</p>
+          <p class="movie">過去の大会動画は<span>こちら</span></p>
+          <button class="join btn btn-primary">参加する</button>
+        </div>
+      </div>
+      <div class="tournament-container grade-2"><a data-target="#detail2" cap-effect="fade" class="hcaption"><img src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg"/>
+          <div class="info">
+            <p> <span>2016/04/03</span><span class="grade-2">オープン</span><span>所沢  </span><span class="capacity">定員8/10</span></p>
+          </div></a>
+        <div id="detail2" class="content">
+          <p>今年最初のオープン大会！今年のトロフィーは誰の手に渡るのか？！</p>
+          <p class="movie">過去の大会動画は<span>こちら</span></p>
+          <button ng-click="join()" class="join btn btn-primary">参加する</button>
+        </div>
+      </div>
+      <div class="tournament-container grade-3"><a data-target="#detail3" cap-effect="fade" class="hcaption"><img src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg"/>
+          <div class="info">
+            <p> <span>2016/04/12</span><span class="grade-3">チャレンジャー</span><span>所沢  </span><span class="capacity">定員5/10</span></p>
+          </div></a>
+        <div id="detail3" class="content">
+          <p>今年最初のチャレンジャー大会！今年のトロフィーは誰の手に渡るのか？！</p>
+          <p class="movie">過去の大会動画は<span>こちら</span></p>
+          <button ng-click="join()" class="join btn btn-primary">参加する</button>
+        </div>
+      </div>
+      <div class="tournament-container grade-4"><a data-target="#detail4" cap-effect="fade" class="hcaption"><img src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg"/>
+          <div class="info">
+            <p> <span>2016/05/05</span><span class="grade-4">ビギナー</span><span>所沢  </span><span class="capacity">定員2/10</span></p>
+          </div></a>
+        <div id="detail4" class="content">
+          <p>今年最初のビギナー大会！まずはここから力を伸ばしていこう！初心者大歓迎！</p>
+          <p class="movie">過去の大会動画は<span>こちら</span></p>
+          <button ng-click="join()" class="join btn btn-primary">参加する</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

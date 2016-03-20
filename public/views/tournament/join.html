@@ -1,0 +1,19 @@
+
+<div class="join-modal">
+  <div class="close"><span ng-click="close()" class="fui-cross"></span></div>
+  <div class="pair"><span>ペア名を入力してください</span>
+    <input ng-model="input" ng-change="change()"/>
+    <div class="candidate">
+      <p ng-repeat="name in candidates"><span ng-click="complete(name)">{{ name | first_name }}</span></p>
+    </div>
+  </div>
+  <div class="credit"><span>クレジットカード決済</span>
+    <select data-toggle="select" class="form-control select select-primary">
+      <option value="0">VISA *******</option>
+      <option value="1">MASTER *****</option>
+    </select>
+  </div>
+  <div class="text-center">
+    <button ng-click="join()" class="btn btn-primary">参加する</button>
+  </div>
+</div>
