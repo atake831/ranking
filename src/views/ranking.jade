@@ -30,6 +30,7 @@ div(ng-controller="RankingController")
             tbody
               tr(ng-repeat="player in players | woman")
                 td {{ player.rank }}
-                td {{ player.name }}
+                td 
+                  span.clickable-text(ng-click="profile(player.id)") {{ player.name }}
                 td {{ player.age }}
                 td {{ player.point }}
