@@ -48,9 +48,9 @@
     app.controller('AppController', function($scope, $rootScope, $location, Data, $uibModal) {
         $(document).ready(function(){
             // $location.path('/home');
-            // $location.path('/ranking');
+            $location.path('/ranking');
             // $location.path('/profile/1');
-            $location.path('/tournaments');
+            // $location.path('/tournaments');
             // $location.path('/facility/tournaments');
             // $location.path('/facility/tournament/result');
         });
