@@ -50,9 +50,9 @@
             // $location.path('/home');
             // $location.path('/ranking');
             // $location.path('/profile/1');
-            // $location.path('/tournaments');
+            $location.path('/tournaments');
             // $location.path('/facility/tournaments');
-            $location.path('/facility/tournament/result');
+            // $location.path('/facility/tournament/result');
         });
 
         function changeBackgroundImage(color) {
@@ -231,10 +231,32 @@
             });
         }
 
+        function showJoinedPlayersModal() {
+            $uibModal.open({
+                templateUrl: 'views/joined_players.html',
+                controller: 'JoinedPlayersController',
+                backdrop: true,
+                scope: $scope,
+            });
+        }
+
+        $scope.joined_players = function() {
+            showJoinedPlayersModal();
+        };
+
         $scope.join = function() {
             showJoinModal();
         };
         $scope.movie = function() {
+        };
+    });
+    app.controller('JoinedPlayersController', function ($scope, $rootScope, $uibModalInstance, $timeout, $location) {
+        $scope.players = Src.PLAYERS;
+        $scope.close = function() {
+            $uibModalInstance.close();
+        };
+        $scope.profile = function(id) {
+            $location.path("profile/" + id);
         };
     });
     app.controller('TournamentJoinController', function ($scope, $rootScope, $uibModalInstance, $timeout) {

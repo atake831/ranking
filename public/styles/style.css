@@ -61,14 +61,30 @@ nav {
 .navbar-brand {
   text-align: center;
 }
+.joined-players {
+  padding: 30px;
+}
+.joined-players .close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
 .signin {
-  height: 200px;
   padding: 30px;
 }
 .signin div {
   text-align: center;
   padding: 8px;
   margin-bottom: 20px;
+}
+.signin div img {
+  width: 200px;
+  height: 35px;
+  margin-bottom: 10px;
+}
+.signin div.signin-select {
+  background-color: #fafafa;
+  height: 300px;
 }
 .signin button {
   margin-left: 10px;

@@ -1,0 +1,18 @@
+div.joined-players
+  div.close
+    span.fui-cross(ng-click="close()")
+  div.ranking
+    div.text-center
+      h5 参加予定の選手
+    table
+      thead
+        tr
+          th player
+          th age
+          th point
+      tbody
+        tr(ng-repeat="player in players | man")
+          td 
+            span.clickable-text(ng-click="profile(player.id)") {{ player.name }}
+          td {{ player.age }}
+          td {{ player.point }}

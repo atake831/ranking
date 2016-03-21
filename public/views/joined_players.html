@@ -1,0 +1,25 @@
+
+<div class="joined-players">
+  <div class="close"><span ng-click="close()" class="fui-cross"></span></div>
+  <div class="ranking">
+    <div class="text-center">
+      <h5>参加予定の選手</h5>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>player</th>
+          <th>age</th>
+          <th>point</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="player in players | man">
+          <td> <span ng-click="profile(player.id)" class="clickable-text">{{ player.name }}</span></td>
+          <td>{{ player.age }}</td>
+          <td>{{ player.point }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

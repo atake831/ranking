@@ -1,8 +1,16 @@
 div.signin
   div.close
     span.fui-cross(ng-click="close()")
-  div please select roles
   div
     button.btn.btn-primary(ng-click="admin()") JPAユーザー
     button.btn.btn-primary(ng-click="facility()") 施設ユーザー
-    button.btn.btn-primary(ng-click="user()") 一般ユーザー
+  div.sigin-select(ng-click="user()")
+    img(src="images/facebook-btn.png")
+    <br>
+    img(src="images/twitter-btn.png")
+    <br>
+    img(src="images/line-btn.png")
+    <br>
+    p メールアドレスを入力してログイン
+    input(placeholder="メールアドレス")
+    button.btn.btn-primary(ng-click="facility()") ログイン

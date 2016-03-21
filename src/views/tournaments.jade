@@ -17,7 +17,7 @@ div(ng-controller="TournamentsController")
             span こちら
           button.join.btn.btn-primary 参加する
 
-      div.tournament-container.grade-2
+      div.tournament-container.grade-2(ng-click="joined_players()")
         a.hcaption(data-target="#detail2" cap-effect="fade")
           img(src="https://j-futsal.jfa.jp/j-fut/F00110/Image/3.jpg")
           div.info
