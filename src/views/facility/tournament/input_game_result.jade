@@ -1,0 +1,14 @@
+div.input-game-result
+  div.close
+    span.fui-cross(ng-click="dismiss()")
+  div 
+    p 試合のスコアを入力してください
+    div.players.text-center
+      div.player1
+      input(ng-model="score1")
+      span vs
+      input(ng-model="score2")
+      div.player2
+    
+  div
+    button.btn.btn-primary(ng-click="submit()") 決定

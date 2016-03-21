@@ -1,6 +1,6 @@
 div(ng-controller="RankingController")
   div.container.tabs
-    h3 ランキング
+    h3(ng-click="test()") ランキング
     uib-tabset(active="active")
       uib-tab(index="0" heading="man")
         div.ranking

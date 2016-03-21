@@ -366,6 +366,7 @@ nav {
             }
             .match {
                 .player {
+                    position: relative;
                     vendor('box-sizing', content-box);
                     border: solid 1px black;
                     border-radius: 5px;
@@ -390,6 +391,25 @@ nav {
                         position: relative;
                         left: 130px;
                         margin-bottom: 0px;
+                    }
+                    &.lose {
+                        background-color: rgb(200, 200, 200);
+                    }
+                    .score {
+                        position: absolute;
+                        left: 160px;
+                        line-height: 0px;
+                        padding-top: 15px;
+                        &.player-0 {
+                            top: 0px;
+                        }
+                        &.player-1 {
+                            bottom: 0px;
+                            padding-bottom: 12px;
+                        }
+                        &.winner {
+                            color: red;
+                        }
                     }
                 }
             }
@@ -417,4 +437,66 @@ nav {
     }
 }
 
+.input-game-result {
+    padding: 30px;
+    div {
+        text-align: center;
+        padding: 8px;
+        margin-bottom:30px;
+        .players {
+            margin-bottom: 0px;
+            span {
+                line-height: 55px;
+                margin-right: -4px;
+            }
+            input {
+                width: 30px;
+                margin: 10px;
+                border: none;
+                border-bottom: 1px solid black;
+            }
+        }
+        .player1, .player2 {
+            margin: 0px;
+            display: inline-block;
+            padding: 0px;
+        }
+        .player {
+            vendor('box-sizing', content-box);
+            border: solid 1px black;
+            border-radius: 5px;
+            width: 150px;
+            height: 55px;
+            padding 0px 5px;
+            line-height: 55px;
+            background-color: #46CFB0;
+            .name {
+                text-align: center;
+                text-decoration: none;
+                width: 100%;
+                color: black;
+                padding: 5px;
+                margin: 0px;
+                line-height: 1;
+            }
+            &.player-0 {
+                float: left;
+            }
+            &.player-1 {
+                float: right;
+            }
+        }
+        .input-score {
+            clear: both;
+        }
+    }
+    button {
+        width: 70%;
+    }
+    .close {
+        position:absolute;
+        right: 10px;
+        top: 10px;
+    }
+}
 

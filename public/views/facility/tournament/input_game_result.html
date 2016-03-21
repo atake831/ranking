@@ -1,0 +1,16 @@
+
+<div class="input-game-result">
+  <div class="close"><span ng-click="dismiss()" class="fui-cross"></span></div>
+  <div> 
+    <p>試合のスコアを入力してください</p>
+    <div class="players text-center">
+      <div class="player1"></div>
+      <input ng-model="score1"/><span>vs</span>
+      <input ng-model="score2"/>
+      <div class="player2"></div>
+    </div>
+  </div>
+  <div>
+    <button ng-click="submit()" class="btn btn-primary">決定</button>
+  </div>
+</div>

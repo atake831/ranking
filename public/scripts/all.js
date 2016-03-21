@@ -243,30 +243,6 @@
         $scope.close = function() {
             $uibModalInstance.close();
         };
-        var source = [
-          "ActionScript",
-          "AppleScript",
-          "Asp",
-          "BASIC",
-          "C",
-          "C++",
-          "Clojure",
-          "COBOL",
-          "ColdFusion",
-          "Erlang",
-          "Fortran",
-          "Groovy",
-          "Haskell",
-          "Java",
-          "JavaScript",
-          "Lisp",
-          "Perl",
-          "PHP",
-          "Python",
-          "Ruby",
-          "Scala",
-          "Scheme"
-        ];
         $scope.change = function() {
             var candidates = [];
             for ( var i = 0 ; i < Src.PLAYERS.length ; i++ ) {
@@ -370,11 +346,70 @@
     });
     app.controller('FacilityTournamentManageController', function ($scope, $rootScope) {
     });
-    app.controller('FacilityTournamentResultController', function ($scope, $rootScope, Brackets) {
+    app.controller('FacilityTournamentResultController', function ($scope, $rootScope, Brackets, $location, $uibModal) {
         var players = Src.PLAYERS;
         var rounds = Src.ROUNDS;
 
-        Brackets.create($(".brackets")[0], players, rounds);
+        function showInputGameResultModal() {
+            return $uibModal.open({
+                templateUrl: 'views/facility/tournament/input_game_result.html',
+                controller: 'InputGameResultController',
+                backdrop: true,
+                scope: $scope,
+            });
+        }
+
+        Brackets.create($scope, $(".brackets")[0], players, rounds);
+        $scope.profile = function(id) {
+            $location.path("profile/" + id);
+        };
+        $scope.game_result = function(round_id, match_id) { 
+            $scope.current_match_player1 = $(".round.rd-" + round_id + " .match.match-" + match_id + " .player.player-" + 0);
+            $scope.current_match_player2 = $(".round.rd-" + round_id + " .match.match-" + match_id + " .player.player-" + 1);
+            var modal_instance = showInputGameResultModal();
+            modal_instance.result.then(function(input) {
+                var winner_id = 0;
+                if ( input[0] < input[1] ) {
+                    winner_id = 1;
+                }
+
+                var winner = $(".round.rd-" + round_id + " .match.match-" + match_id + " .player.player-" + winner_id);
+                var match = $(".round.rd-" + (round_id + 1) + " .match.match-" + (Math.floor(match_id/2)) + " .player.player-" + (match_id%2));
+                match.replaceWith(winner.clone().css("margin-bottom", match.css("margin-bottom")));
+
+                for ( var i = 0 ; i < 2 ; i++ ) {
+                    var player = $(".round.rd-" + round_id + " .match.match-" + match_id + " .player.player-" + i);
+                    var score = $("<div>", {
+                        "class": "score player-" + i,
+                        text: input[i]
+                    });
+                    if ( winner_id == i ) {
+                        score.addClass("winner");
+                    }
+                    else {
+                        player.addClass("lose");
+                    }
+                    player[0].appendChild(score[0]);
+                }
+
+            }, function() {
+                console.log("dismiss");
+            });
+
+        };
+    });
+    app.controller('InputGameResultController', function ($scope, $rootScope, $uibModalInstance, $timeout) {
+        $timeout(function() {
+            $(".player1").replaceWith($scope.current_match_player1.clone());
+            $(".player2").replaceWith($scope.current_match_player2.clone());
+        }, 100);
+        $scope.dismiss = function() {
+            $uibModalInstance.dismiss();
+        };
+        $scope.submit = function() {
+            var input = [ $scope.score1, $scope.score2 ];
+            $uibModalInstance.close(input);
+        }
     });
     app.controller('JpaUsersController', function ($scope, $rootScope) {
     });
@@ -538,23 +573,22 @@
         };
     });
 
-    module.factory('Brackets', function(Util) {
+    module.factory('Brackets', function(Util, $compile) {
         // 奇数にする
         var PLAYER_BOX_HEIGHT = 57;
         var LINE_BORDER_PX = 1;
         var INITIAL_PLAYER_SPACE = 40;
 
         return {
-            players: [],
-            rounds: [],
-            create: function(element, players, rounds) {
+            create: function($scope, element, players, rounds) {
+                this.$scope = $scope;
                 this.players = players;
                 this.rounds = this.prepare_rounds(rounds);
                 var round_num = this.rounds.length;
 
                 var container = $('<div>', {'class': 'container-brackets'})[0];
 
-                this.create_round(container, this.rounds, 1);
+                this.create_round(container, rounds, 1);
                 element.appendChild( container );
                 this.set_style(round_num);
 
@@ -568,6 +602,11 @@
                         $(".player").removeClass('hover');
                     },
                 });
+                $compile(element)(this.$scope);
+            },
+
+            set_game_result: function(round_id, match_id, winner_id) {
+                this.rounds[round_id][Math.floor(match_id / 2)][match_id % 2] = winner_id;
             },
 
             prepare_rounds: function(rounds) {
@@ -605,13 +644,13 @@
                 return [ matches ];
             },
 
-            create_blank_player: function(){
+            create_blank_player: function(player_num){
                 return $('<div>', {
-                    'class': 'player hidden',
+                    'class': 'player hidden player-' + player_num,
                 })[0];
             },
 
-            create_player: function(player_id){
+            create_player: function(player_id, player_num){
                 var player_data = this.players.find(function(player) {
                     return player.id == player_id;
                 });
@@ -622,43 +661,43 @@
                     '佐々木', '山口', '松本', '井上'
                 ];
                 var player = $('<div>', {
-                    'class': 'player',
+                    'class': 'player player-' + player_num,
                     'data-id': player_data.id,
                 })[0];
-                player.appendChild($('<p>', {
+
+                var player_name = $('<p>', {
                     'class': 'name',
                     text: player_data.name.split(" ")[0],
-                })[0]);
+                })[0];
+                player_name.setAttribute("ng-click", "profile(" + player_data.id + ")");
+                player.appendChild(player_name);
+
                 player.appendChild($('<p>', {
                     'class': 'name',
                     text: pair_name[player_data.id - 1]
                 })[0]);
-                if ( player_data.url ) {
-                    player.click(function() {
-                        console.log("player clicked !!");
-                        // location.href(player_data.url);
-                    });
-                }
 
                 return player;
             },
 
-            create_match: function(round, match_data){
-                if ( match_data.length == 0 ) return round;
-                var current_match_data = match_data.shift();
+            create_match: function(round, match_data, match_num){
+                if ( match_data.length == match_num ) return round;
+                var current_match_data = match_data[match_num];
 
-                var match = $('<div>', {'class': 'match'})[0];
+                var match = $('<div>', {
+                    'class': 'match match-' + round.children.length
+                })[0];
                 for ( var i = 0 ; i < current_match_data.length ; i++ ) {
                     if ( current_match_data[i] ) {
-                        match.appendChild(this.create_player(current_match_data[i]));
+                        match.appendChild(this.create_player(current_match_data[i], i));
                     }
                     else {
-                        match.appendChild(this.create_blank_player());
+                        match.appendChild(this.create_blank_player(i));
                     }
                 }
                 round.appendChild(match);
 
-                return this.create_match(round, match_data);
+                return this.create_match(round, match_data, ++match_num);
             },
 
             create_separator: function(round_num, separator_num){
@@ -667,9 +706,9 @@
                 })[0];
                 for ( var i = 0; i < separator_num; i++ ) {
                     var line = $('<div>', {'class': 'line'})[0];
-                    line.click(function() {
-                        console.log("**** " + round_num + " " + i + " ****");
-                    });
+                    line.setAttribute("ng-click", 
+                        "game_result( " + round_num + ", " + i + ")"
+                    );
                     separator.appendChild(line);
                 }
 
@@ -677,17 +716,17 @@
             },
 
             create_round: function(container, round_data, round_num) {
-                var current_round_data = round_data.shift();
+                var current_round_data = round_data[round_num - 1];
 
                 var round = $('<div>', {'class': 'round rd-' + round_num})[0];
-                this.create_match(round, current_round_data);
+                this.create_match(round, current_round_data, 0);
 
                 container.appendChild(round);
 
                 var sparator = this.create_separator( round_num, round.children.length );
                 container.appendChild(sparator);
 
-                if ( round_data.length == 0 ) {
+                if ( round_data.length == round_num ) {
                     return container;   
                 }
 

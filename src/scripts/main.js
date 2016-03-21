@@ -243,30 +243,6 @@
         $scope.close = function() {
             $uibModalInstance.close();
         };
-        var source = [
-          "ActionScript",
-          "AppleScript",
-          "Asp",
-          "BASIC",
-          "C",
-          "C++",
-          "Clojure",
-          "COBOL",
-          "ColdFusion",
-          "Erlang",
-          "Fortran",
-          "Groovy",
-          "Haskell",
-          "Java",
-          "JavaScript",
-          "Lisp",
-          "Perl",
-          "PHP",
-          "Python",
-          "Ruby",
-          "Scala",
-          "Scheme"
-        ];
         $scope.change = function() {
             var candidates = [];
             for ( var i = 0 ; i < Src.PLAYERS.length ; i++ ) {
@@ -370,11 +346,70 @@
     });
     app.controller('FacilityTournamentManageController', function ($scope, $rootScope) {
     });
-    app.controller('FacilityTournamentResultController', function ($scope, $rootScope, Brackets) {
+    app.controller('FacilityTournamentResultController', function ($scope, $rootScope, Brackets, $location, $uibModal) {
         var players = Src.PLAYERS;
         var rounds = Src.ROUNDS;
 
-        Brackets.create($(".brackets")[0], players, rounds);
+        function showInputGameResultModal() {
+            return $uibModal.open({
+                templateUrl: 'views/facility/tournament/input_game_result.html',
+                controller: 'InputGameResultController',
+                backdrop: true,
+                scope: $scope,
+            });
+        }
+
+        Brackets.create($scope, $(".brackets")[0], players, rounds);
+        $scope.profile = function(id) {
+            $location.path("profile/" + id);
+        };
+        $scope.game_result = function(round_id, match_id) { 
+            $scope.current_match_player1 = $(".round.rd-" + round_id + " .match.match-" + match_id + " .player.player-" + 0);
+            $scope.current_match_player2 = $(".round.rd-" + round_id + " .match.match-" + match_id + " .player.player-" + 1);
+            var modal_instance = showInputGameResultModal();
+            modal_instance.result.then(function(input) {
+                var winner_id = 0;
+                if ( input[0] < input[1] ) {
+                    winner_id = 1;
+                }
+
+                var winner = $(".round.rd-" + round_id + " .match.match-" + match_id + " .player.player-" + winner_id);
+                var match = $(".round.rd-" + (round_id + 1) + " .match.match-" + (Math.floor(match_id/2)) + " .player.player-" + (match_id%2));
+                match.replaceWith(winner.clone().css("margin-bottom", match.css("margin-bottom")));
+
+                for ( var i = 0 ; i < 2 ; i++ ) {
+                    var player = $(".round.rd-" + round_id + " .match.match-" + match_id + " .player.player-" + i);
+                    var score = $("<div>", {
+                        "class": "score player-" + i,
+                        text: input[i]
+                    });
+                    if ( winner_id == i ) {
+                        score.addClass("winner");
+                    }
+                    else {
+                        player.addClass("lose");
+                    }
+                    player[0].appendChild(score[0]);
+                }
+
+            }, function() {
+                console.log("dismiss");
+            });
+
+        };
+    });
+    app.controller('InputGameResultController', function ($scope, $rootScope, $uibModalInstance, $timeout) {
+        $timeout(function() {
+            $(".player1").replaceWith($scope.current_match_player1.clone());
+            $(".player2").replaceWith($scope.current_match_player2.clone());
+        }, 100);
+        $scope.dismiss = function() {
+            $uibModalInstance.dismiss();
+        };
+        $scope.submit = function() {
+            var input = [ $scope.score1, $scope.score2 ];
+            $uibModalInstance.close(input);
+        }
     });
     app.controller('JpaUsersController', function ($scope, $rootScope) {
     });
