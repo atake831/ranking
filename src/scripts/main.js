@@ -62,11 +62,22 @@
             $('body').addClass(color);
         }
         function showSigninModal() {
-            $uibModal.open({
+            var instance = $uibModal.open({
                 templateUrl: 'views/signin.html',
                 controller: 'SigninController',
                 backdrop: true,
                 scope: $scope,
+            });
+            instance.result.then(function(role) {
+                if ( role == "facility" ) {
+                    $location.path('/facility/tournaments');
+                }
+                else if ( role == "admin" ) {
+                    $location.path('/ranking');
+                }
+                else {
+                    $location.path('/profile/1');
+                }
             });
         }
         $rootScope.navbarLeft = [
@@ -92,7 +103,7 @@
             logout: function() {
                 alert("ログアウトしました");
                 rootScope.common.role.changeLogoutUser();
-                $location.path('/home');
+                $location.path('/ranking');
             },
             role: {
                 changeLogoutUser: function() {
@@ -194,20 +205,20 @@
     });
 
     app.controller('SigninController', function ($scope, $rootScope, $uibModalInstance) {
-        $scope.close = function() {
-            $uibModalInstance.close();
+        $scope.close = function(role) {
+            $uibModalInstance.close(role);
         };
         $scope.admin = function() {
             $rootScope.common.role.changeAdmin();
-            $scope.close();
+            $scope.close("admin");
         }
         $scope.facility = function() {
             $rootScope.common.role.changeFacility();
-            $scope.close();
+            $scope.close("facility");
         }
         $scope.user = function() {
             $rootScope.common.role.changeLoggedinUser();
-            $scope.close();
+            $scope.close("user");
         }
     });
 
@@ -240,6 +251,15 @@
             });
         }
 
+        function showMovieModal() {
+            $uibModal.open({
+                templateUrl: 'views/movie.html',
+                controller: 'MovieController',
+                backdrop: true,
+                scope: $scope,
+            });
+        }
+
         $scope.joined_players = function() {
             showJoinedPlayersModal();
         };
@@ -248,6 +268,12 @@
             showJoinModal();
         };
         $scope.movie = function() {
+            showMovieModal();
+        };
+    });
+    app.controller('MovieController', function ($scope, $rootScope, $uibModalInstance, $timeout, $location) {
+        $scope.close = function() {
+            $uibModalInstance.close();
         };
     });
     app.controller('JoinedPlayersController', function ($scope, $rootScope, $uibModalInstance, $timeout, $location) {

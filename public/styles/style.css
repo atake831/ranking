@@ -69,6 +69,20 @@ nav {
   right: 10px;
   top: 10px;
 }
+.movie-modal {
+  padding: 30px;
+}
+.movie-modal iframe {
+  margin-left: -10px;
+}
+.movie-modal .grade-1 {
+  color: #27ae60;
+}
+.movie-modal .close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
 .signin {
   padding: 30px;
 }
